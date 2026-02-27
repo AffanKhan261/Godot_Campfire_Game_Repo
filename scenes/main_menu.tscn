@@ -1,3 +1,39 @@
 [gd_scene format=3 uid="uid://klwod7wfsxh3"]
 
-[node name="Main Menu" type="Node2D" unique_id=377224813]
+[ext_resource type="FontFile" uid="uid://bbfm0q7fajwvn" path="res://assets/PressStart2P-Regular.ttf" id="1_l6cm7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vue75"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.20348486, 0.7098462, 0.65717113, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Main Menu" type="Control" unique_id=834350976]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Panel" type="Panel" parent="." unique_id=1373893451]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 647.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1759762795]
+layout_mode = 0
+offset_left = 309.0
+offset_top = 171.0
+offset_right = 866.0
+offset_bottom = 602.0
+
+[node name="Start Button" type="Button" parent="VBoxContainer" unique_id=1784897486]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 49
+theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
+text = "Start"
