@@ -5,6 +5,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+var facing := 1 # 1 = right, -1 = left
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -15,13 +16,17 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# Movement
 	var direction := Input.get_axis("move_left", "move_right")
-	if direction:
+
+	if direction != 0:
 		velocity.x = direction * SPEED
+		facing = sign(direction) # remember which way we're facing
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	# Flip sprite (Godot 4: flip_h flips horizontally)
+	animated_sprite.flip_h = (facing == -1)
 
 	# Animations
 	if is_on_floor():
@@ -30,5 +35,12 @@ func _physics_process(delta: float) -> void:
 		else:
 			animated_sprite.play("walk")
 	else:
-		animated_sprite.play("jump")
+		# Optional: if you have these animations
+		if velocity.y < 0:
+			if animated_sprite.sprite_frames.has_animation("jump"):
+				animated_sprite.play("jump")
+		else:
+			if animated_sprite.sprite_frames.has_animation("fall"):
+				animated_sprite.play("fall")
+
 	move_and_slide()
