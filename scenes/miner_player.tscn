@@ -141,8 +141,6 @@ script = ExtResource("1_iyavu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1800577890]
 sprite_frames = SubResource("SpriteFrames_agh33")
 animation = &"attack"
-frame = 5
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=621166794]
 position = Vector2(0.5, 1)
@@ -151,6 +149,7 @@ shape = SubResource("RectangleShape2D_sldkq")
 [node name="AttackArea2D" type="Area2D" parent="." unique_id=254384067 groups=["player_attack"]]
 collision_layer = 8
 collision_mask = 4
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=375401769]
 position = Vector2(12, 1)
