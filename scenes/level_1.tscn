@@ -44,9 +44,13 @@ texture_region_size = Vector2i(32, 32)
 texture = ExtResource("4_pa8r4")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.5772209, -16, 16, 6.659382, 16, 16, -16, 16, -16, -16)
 1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.381172, -16, 16, 2.8039513, 16, 16, -16, 16, -16, -16)
 2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.9069138, -16, 16, -16, 16, 16, -16, 16, -16, 2.628704)
 3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.9069138, -16, 16, -16, 16, 16, -16, 16, -16, 2.628704)
 
 [sub_resource type="TileSet" id="TileSet_bswci"]
 tile_size = Vector2i(32, 32)
