@@ -1,8 +1,9 @@
-[gd_scene format=3 uid="uid://m10ndhnr4hmg"]
+[gd_scene format=3 uid="uid://cn2s46x67fexa"]
 
 [ext_resource type="Texture2D" uid="uid://b74m2xcn4mq25" path="res://assets/sprites/World/Top layer rock.png" id="1_014kd"]
 [ext_resource type="PackedScene" uid="uid://ba0ticfynhnbu" path="res://scenes/miner_player.tscn" id="2_bswci"]
 [ext_resource type="Texture2D" uid="uid://u7pr8oth65po" path="res://assets/sprites/World/Background rock.png" id="2_rus8k"]
+[ext_resource type="AudioStream" uid="uid://bvr0xby76dp5b" path="res://assets/music (remember to credit)/[Prologue]Rivals Of Aether - Anomalous.mp3" id="4_5xbjy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_014kd"]
 texture = ExtResource("1_014kd")
@@ -43,3 +44,8 @@ position = Vector2(-656, -160)
 
 [node name="Camera2D" type="Camera2D" parent="MinerPlayer" unique_id=859660151]
 zoom = Vector2(4, 4)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1307639341]
+stream = ExtResource("4_5xbjy")
+autoplay = true
+bus = &"BGM"
