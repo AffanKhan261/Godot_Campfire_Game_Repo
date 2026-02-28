@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y6847w4err2e"
-path="res://.godot/imported/Top layer rock.png-3d1d52fc20a145ce0f9778d2fe6e685e.ctex"
+uid="uid://d4e6o0xn7lvgi"
+path="res://.godot/imported/magma.png-739fc1fefc7359ac822038a31f2d4656.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Top layer rock.png"
-dest_files=["res://.godot/imported/Top layer rock.png-3d1d52fc20a145ce0f9778d2fe6e685e.ctex"]
+source_file="res://assets/sprites/magma.png"
+dest_files=["res://.godot/imported/magma.png-739fc1fefc7359ac822038a31f2d4656.ctex"]
 
 [params]
 

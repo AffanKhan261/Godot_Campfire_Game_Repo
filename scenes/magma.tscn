@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dl5vm7svnl5eb"]
+
+[ext_resource type="Texture2D" uid="uid://d4e6o0xn7lvgi" path="res://assets/sprites/magma.png" id="1_88ox0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1gu6"]
+atlas = ExtResource("1_88ox0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldwab"]
+atlas = ExtResource("1_88ox0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxgwb"]
+atlas = ExtResource("1_88ox0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pq4mn"]
+atlas = ExtResource("1_88ox0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_450e0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1gu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldwab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxgwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pq4mn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Magma" type="Node2D" unique_id=482492784]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1714763309]
+sprite_frames = SubResource("SpriteFrames_450e0")
+frame_progress = 0.85180527
