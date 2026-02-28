@@ -31,6 +31,11 @@ var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var dash_dir: int = 1 # -1 left, +1 right
 
+# ---------------- ATTACK ----------------
+const ATTACK_COOLDOWN: float = 0.25
+var is_attacking: bool = false
+var attack_cooldown_timer: float = 0.0
+
 # ---------------- FACING (smooth) ----------------
 var facing: int = 1
 var facing_blend: float = 1.0
@@ -43,8 +48,16 @@ func _ready() -> void:
 	# Initialize landing state correctly (important if player spawns on ground)
 	was_on_floor = is_on_floor()
 
+	# End attack when the "attack" animation finishes
+	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
+
 func _physics_process(delta: float) -> void:
 	_update_dash_timers(delta)
+	_update_attack_timers(delta)
+
+	# Attack input (action name: "attack" -> bind F in Input Map)
+	if Input.is_action_just_pressed("attack"):
+		_try_attack()
 
 	# Dash input (your action name)
 	if Input.is_action_just_pressed("speed_dash"):
@@ -67,8 +80,12 @@ func _physics_process(delta: float) -> void:
 	# Horizontal movement
 	if is_dashing:
 		_perform_dash_motion()
-	else:
+	elif not is_attacking:
+		# optional: lock movement during attack
 		_handle_horizontal_movement(delta)
+	else:
+		# optional: slow drift during attack instead of full stop
+		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
 
 	# Smooth flip
 	_update_facing_and_flip(delta)
@@ -80,6 +97,28 @@ func _physics_process(delta: float) -> void:
 
 	# ONLY reset jumps when you LAND on the ground
 	_post_move_floor_reset()
+
+# ---------------- ATTACK ----------------
+func _try_attack() -> void:
+	if is_attacking:
+		return
+	if attack_cooldown_timer > 0.0:
+		return
+	if not animated_sprite.sprite_frames.has_animation("attack"):
+		return
+
+	is_attacking = true
+	attack_cooldown_timer = ATTACK_COOLDOWN
+	animated_sprite.play("attack")
+
+func _update_attack_timers(delta: float) -> void:
+	if attack_cooldown_timer > 0.0:
+		attack_cooldown_timer -= delta
+
+func _on_animated_sprite_animation_finished() -> void:
+	# Only end the attack when the attack animation finishes
+	if animated_sprite.animation == "attack":
+		is_attacking = false
 
 # ---------------- FLOOR RESET ----------------
 func _post_move_floor_reset() -> void:
@@ -176,6 +215,10 @@ func _update_facing_and_flip(delta: float) -> void:
 
 # ---------------- ANIMATIONS ----------------
 func _update_animations() -> void:
+	# Don't override the attack animation while attacking
+	if is_attacking:
+		return
+
 	# You requested: use "walk" animation for dash too
 	if is_dashing:
 		if animated_sprite.animation != "walk":
