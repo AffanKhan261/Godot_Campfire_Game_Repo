@@ -299,10 +299,15 @@ func _update_facing_and_flip(delta: float) -> void:
 
 # ---------------- ANIMATIONS ----------------
 func _update_animations() -> void:
+
+
+
 	if GlobalVar.HEALTH > 0:
 		# Don't override the attack animation while attacking
 		if is_attacking:
 			return
+
+
 		# Death has priority
 		if is_dead:
 			return
@@ -310,6 +315,16 @@ func _update_animations() -> void:
 		# Don't override the attack animation while attacking
 		if is_attacking:
 			return
+
+
+		# Death has priority
+		if is_dead:
+			return
+
+		# Don't override the attack animation while attacking
+		if is_attacking:
+			return
+
 
 		# Use "walk" for dash
 		if is_dashing:
@@ -334,8 +349,6 @@ func _update_animations() -> void:
 	else:
 		#stops all player input
 		animated_sprite.play("death")
-		await get_tree().create_timer(2).timeout
-		#get_tree().reload_current_scene()
 
 func get_facing() -> int:
 	return facing
