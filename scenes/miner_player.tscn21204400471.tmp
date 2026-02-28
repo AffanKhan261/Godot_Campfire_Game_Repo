@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://c36k1aoitnyaq"]
+
+[ext_resource type="Script" uid="uid://c1l24u75dq8tk" path="res://scripts/miner_player.gd" id="1_iyavu"]
+[ext_resource type="Texture2D" uid="uid://hrs1soljsuru" path="res://assets/sprites/Player/Miner character idle.png" id="1_sldkq"]
+[ext_resource type="Texture2D" uid="uid://cy1is216nxvbc" path="res://assets/sprites/Player/Miner character 1.png" id="3_3pmy6"]
+[ext_resource type="Texture2D" uid="uid://bguvv1ohsel6s" path="res://assets/sprites/Player/Miner character jump.png" id="3_ieu5k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyavu"]
+atlas = ExtResource("1_sldkq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pmy6"]
+atlas = ExtResource("1_sldkq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ieu5k"]
+atlas = ExtResource("1_sldkq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f038o"]
+atlas = ExtResource("1_sldkq")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hjl3"]
+atlas = ExtResource("3_ieu5k")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_op468"]
+atlas = ExtResource("3_ieu5k")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agh33"]
+atlas = ExtResource("3_3pmy6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrcab"]
+atlas = ExtResource("3_3pmy6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_agh33"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyavu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pmy6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ieu5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f038o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_2hjl3")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_op468")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agh33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrcab")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sldkq"]
+size = Vector2(15, 26)
+
+[node name="MinerPlayer" type="CharacterBody2D" unique_id=1949860573]
+collision_layer = 2
+collision_mask = 21
+script = ExtResource("1_iyavu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1800577890]
+sprite_frames = SubResource("SpriteFrames_agh33")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=621166794]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_sldkq")
