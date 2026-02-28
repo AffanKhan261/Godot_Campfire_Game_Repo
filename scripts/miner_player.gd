@@ -35,17 +35,21 @@ var dash_dir: int = 1 # -1 left, +1 right
 
 # ---------------- ATTACK (action = attack, keybind F) ----------------
 @export var attack_damage: int = 25
-
-# How long the hitbox is active (damage window)
 @export var attack_active_time: float = 0.12
-
-# How long we stay in "attacking" state (animation lock window)
 @export var attack_total_time: float = 0.30
-
 @export var attack_cooldown: float = 0.25
 
 var is_attacking: bool = false
 var attack_cooldown_timer: float = 0.0
+
+# ---------------- HEALTH / DEATH ----------------
+@export var max_health: int = 100
+var health: int = 0
+
+@export var invulnerable_time: float = 0.35
+var _invuln_timer: float = 0.0
+
+var is_dead: bool = false
 
 # ---------------- FACING (smooth) ----------------
 var facing: int = 1
@@ -58,6 +62,8 @@ var was_on_floor: bool = false
 func _ready() -> void:
 	was_on_floor = is_on_floor()
 
+	health = max_health
+
 	# Tag hitbox so boss can detect it via area.is_in_group("player_attack")
 	attack_area.add_to_group("player_attack")
 
@@ -66,8 +72,14 @@ func _ready() -> void:
 	attack_shape.disabled = true
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		# Let death animation play, no movement/inputs
+		move_and_slide()
+		return
+
 	_update_dash_timers(delta)
 	_update_attack_timers(delta)
+	_update_invuln(delta)
 
 	# Attack input (Input Map action name: "attack" bound to F)
 	if Input.is_action_just_pressed("attack"):
@@ -110,6 +122,50 @@ func _physics_process(delta: float) -> void:
 
 	# ONLY reset jumps when you LAND on the ground
 	_post_move_floor_reset()
+
+# ---------------- DAMAGE / DEATH ----------------
+func take_damage(amount: int) -> void:
+	if is_dead:
+		return
+	if _invuln_timer > 0.0:
+		return
+
+	health = max(health - amount, 0)
+	_invuln_timer = invulnerable_time
+
+	# Optional: small knockback feel (tweak/remove if you want)
+	# velocity.x = -float(facing) * 120.0
+
+	if health <= 0:
+		_die()
+		return
+
+	# If you have a hurt animation, you can play it here safely:
+	# if animated_sprite.sprite_frames.has_animation("hurt"):
+	# 	animated_sprite.play("hurt")
+
+func _die() -> void:
+	is_dead = true
+	is_attacking = false
+	is_dashing = false
+
+	# Turn off the attack hitbox so you can't damage while dead
+	attack_area.monitoring = false
+	attack_shape.disabled = true
+
+	# Stop movement
+	velocity = Vector2.ZERO
+
+	# Play death animation if present
+	if animated_sprite.sprite_frames.has_animation("death"):
+		animated_sprite.play("death")
+	else:
+		# fallback
+		animated_sprite.play("idle")
+
+func _update_invuln(delta: float) -> void:
+	if _invuln_timer > 0.0:
+		_invuln_timer -= delta
 
 # ---------------- ATTACK ----------------
 func get_damage() -> int:
@@ -244,6 +300,13 @@ func _update_facing_and_flip(delta: float) -> void:
 # ---------------- ANIMATIONS ----------------
 func _update_animations() -> void:
 	if GlobalVar.HEALTH > 0:
+		# Don't override the attack animation while attacking
+		if is_attacking:
+			return
+		# Death has priority
+		if is_dead:
+			return
+
 		# Don't override the attack animation while attacking
 		if is_attacking:
 			return

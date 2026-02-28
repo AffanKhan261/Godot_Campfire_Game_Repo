@@ -9,8 +9,8 @@ enum State { IDLE, CHASE, ATTACK_MELEE, ATTACK_RANGED, STAGGER, DEAD }
 @export var max_health: int = 300
 
 # Distances (tune these)
-@export var stop_distance: float = 140.0         # was 24; too small for your scaled boss
-@export var melee_range: float = 220.0           # must be > stop_distance
+@export var stop_distance: float = 140.0
+@export var melee_range: float = 220.0
 @export var ranged_range: float = 520.0
 
 # Attack timings
@@ -19,43 +19,51 @@ enum State { IDLE, CHASE, ATTACK_MELEE, ATTACK_RANGED, STAGGER, DEAD }
 @export var melee_windup: float = 0.15
 @export var melee_active_time: float = 0.20
 
-# Placeholder damage (until you implement player health)
-@export var contact_damage: int = 10
+# Damage (player dies instantly for testing by default below)
+@export var contact_damage: int = 999999
 
-# --- Damage intake tuning (prevents multi-hit spam) ---
-@export var damage_i_frame_time: float = 0.15 # seconds of immunity per hit source
+# Damage intake tuning (prevents multi-hit spam)
+@export var damage_i_frame_time: float = 0.15
 var _last_hit_time_by_source: Dictionary = {}
 
 var health: int
 var state: State = State.IDLE
 
-# Your player is a CharacterBody2D
 var player: CharacterBody2D = null
 
-# Facing: -1 = left, +1 = right. Your idle faces LEFT by default.
+# Facing: -1 = left, +1 = right. Idle faces LEFT by default.
 var facing: float = -1.0
 
 @onready var attack_cooldown: Timer = $AttackCooldown
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
-# Optional nodes (only if you have them)
 @onready var hit_box: Area2D = get_node_or_null("HitBox")
 @onready var hurt_box: Area2D = get_node_or_null("HurtBox")
+
+# TEST MODE: if true, touching golem hitbox kills player instantly
+@export var instant_kill_on_touch: bool = true
 
 func _ready() -> void:
 	health = max_health
 	_play_idle()
 
-	# Ensure timer is configured correctly
 	attack_cooldown.one_shot = true
-
-	# HitBox should only be active during melee frames
-	if hit_box:
-		hit_box.monitoring = false
 
 	# HurtBox should always be able to receive hits
 	if hurt_box:
 		hurt_box.monitoring = true
+
+	# HitBox setup
+	if hit_box:
+		# For attack-timed behavior you normally keep this off.
+		# For testing instant death on touch, keep it on.
+		hit_box.monitoring = instant_kill_on_touch
+
+		# IMPORTANT: in your .tscn the HitBox/CollisionShape2D is disabled=true.
+		# Enable it so body_entered can fire.
+		var cs := hit_box.get_node_or_null("CollisionShape2D")
+		if cs is CollisionShape2D:
+			cs.disabled = false
 
 func _physics_process(delta: float) -> void:
 	if state == State.DEAD:
@@ -69,7 +77,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0.0, accel * delta)
 			_play_idle()
 
-			# If we already have a target, start chasing
 			if player != null:
 				state = State.CHASE
 
@@ -77,7 +84,6 @@ func _physics_process(delta: float) -> void:
 			_do_chase(delta)
 
 		State.ATTACK_MELEE, State.ATTACK_RANGED, State.STAGGER:
-			# No movement during attacks/stagger
 			velocity.x = move_toward(velocity.x, 0.0, accel * delta)
 
 	move_and_slide()
@@ -94,12 +100,9 @@ func _do_chase(delta: float) -> void:
 	# Face toward player
 	if dist > 2.0:
 		facing = signf(dx)
-
-	# Because your art faces LEFT by default:
-	# flip_h = true should make it face RIGHT.
 	anim.flip_h = facing > 0.0
 
-	# Attack checks first (if close enough, attack instead of jittering)
+	# Attack checks first
 	if attack_cooldown.is_stopped():
 		if dist <= melee_range:
 			_start_melee_attack()
@@ -108,9 +111,7 @@ func _do_chase(delta: float) -> void:
 			_start_ranged_attack()
 			return
 
-	# Movement:
-	# - far: move at full speed
-	# - near stop distance: smoothly slow down
+	# Movement with smooth slow-down band near stop_distance
 	var desired_speed: float = speed
 	if dist <= stop_distance:
 		desired_speed = 0.0
@@ -121,7 +122,6 @@ func _do_chase(delta: float) -> void:
 	var target_vx: float = facing * desired_speed
 	velocity.x = move_toward(velocity.x, target_vx, accel * delta)
 
-	# Animations while chasing
 	if absf(velocity.x) > 5.0:
 		_play_walk()
 	else:
@@ -131,9 +131,12 @@ func _start_melee_attack() -> void:
 	state = State.ATTACK_MELEE
 	attack_cooldown.start(melee_cooldown)
 
-	# Keep it simple/reliable: face toward the player for melee
 	anim.flip_h = facing > 0.0
 	anim.play("punch")
+
+	# If we are instant-kill testing, leave hitbox always on and skip timing logic
+	if instant_kill_on_touch:
+		return
 
 	# Enable hitbox briefly (timing-based)
 	if hit_box:
@@ -148,10 +151,9 @@ func _start_ranged_attack() -> void:
 	state = State.ATTACK_RANGED
 	attack_cooldown.start(ranged_cooldown)
 
-	# Face toward player for ranged by default
 	anim.flip_h = facing > 0.0
 	anim.play("axe_attack")
-	# TODO: spawn projectile later
+	# TODO projectile
 
 func _on_attack_cooldown_timeout() -> void:
 	if state == State.DEAD:
@@ -170,7 +172,6 @@ func _on_player_detector_body_exited(body: Node2D) -> void:
 		state = State.IDLE
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	# If we're staggered, go back to chase/idle at end of hurt.
 	if state == State.STAGGER:
 		state = State.CHASE if player != null else State.IDLE
 
@@ -186,12 +187,9 @@ func _play_walk() -> void:
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if state == State.DEAD:
 		return
-
-	# Only accept hits from player attack hitboxes
 	if not area.is_in_group("player_attack"):
 		return
 
-	# --- Anti multi-hit (per attacker area instance) ---
 	var id := area.get_instance_id()
 	var now := Time.get_ticks_msec() / 1000.0
 	var last := float(_last_hit_time_by_source.get(id, -9999.0))
@@ -199,7 +197,6 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		return
 	_last_hit_time_by_source[id] = now
 
-	# Optional: let the attack area define its own damage
 	var dmg := 25
 	if area.has_method("get_damage"):
 		dmg = int(area.call("get_damage"))
@@ -208,9 +205,18 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 
 	_take_damage(dmg)
 
+# --- GOLEM HITBOX HITS PLAYER HERE ---
 func _on_hit_box_body_entered(body: Node2D) -> void:
-	if body == player:
-		print("Boss hit player for %d" % contact_damage)
+	print("HITBOX touched:", body.name)
+
+	# TEST: kill player instantly on touch
+	if instant_kill_on_touch and body is CharacterBody2D and body.has_method("take_damage"):
+		body.call("take_damage", contact_damage)
+		return
+
+	# Normal behavior (when you turn off instant_kill_on_touch)
+	if body == player and body.has_method("take_damage"):
+		body.call("take_damage", contact_damage)
 
 func _take_damage(amount: int) -> void:
 	if state == State.DEAD:
