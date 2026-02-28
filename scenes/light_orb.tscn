@@ -44,6 +44,7 @@ script = ExtResource("1_q02b5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=943782348]
 sprite_frames = SubResource("SpriteFrames_two30")
+autoplay = "default"
 frame = 2
 frame_progress = 0.9238935
 
