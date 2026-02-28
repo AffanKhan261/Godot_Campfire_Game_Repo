@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c36k1aoitnyaq"]
 
-[ext_resource type="Script" path="res://scripts/miner_player.gd" id="1_iyavu"]
+[ext_resource type="Script" uid="uid://c1l24u75dq8tk" path="res://scripts/miner_player.gd" id="1_iyavu"]
 [ext_resource type="Texture2D" uid="uid://hrs1soljsuru" path="res://assets/sprites/Player/Miner character idle.png" id="1_sldkq"]
 [ext_resource type="Texture2D" uid="uid://cy1is216nxvbc" path="res://assets/sprites/Player/Miner character 1.png" id="3_3pmy6"]
 [ext_resource type="Texture2D" uid="uid://bguvv1ohsel6s" path="res://assets/sprites/Player/Miner character jump.png" id="3_ieu5k"]
@@ -60,7 +60,7 @@ animations = [{
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_2hjl3")
 }, {
-"duration": 3.0,
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_op468")
 }],
 "loop": true,
@@ -68,10 +68,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.8,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_agh33")
 }, {
-"duration": 5.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xrcab")
 }],
 "loop": true,
@@ -89,7 +89,7 @@ script = ExtResource("1_iyavu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1800577890]
 sprite_frames = SubResource("SpriteFrames_agh33")
-animation = &"walk"
+animation = &"jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=621166794]
 position = Vector2(0.5, 1)

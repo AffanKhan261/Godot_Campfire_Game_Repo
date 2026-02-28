@@ -15,6 +15,14 @@ run/main_scene="uid://klwod7wfsxh3"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://cw6h1nlpl4ysr"
+
+[autoload]
+
+GlobalVar="*uid://cfb3c2jmmh3dr"
+
 [input]
 
 move_right={
