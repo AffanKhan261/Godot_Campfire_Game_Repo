@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u7pr8oth65po"
-path="res://.godot/imported/Background rock.png-adad641670b6d2d603d1ae7f63378d5a.ctex"
+uid="uid://hrs1soljsuru"
+path="res://.godot/imported/Miner character idle.png-2d95f38e709e2deed29a241e85ff3c37.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Background rock.png"
-dest_files=["res://.godot/imported/Background rock.png-adad641670b6d2d603d1ae7f63378d5a.ctex"]
+source_file="res://assets/sprites/Player/Miner character idle.png"
+dest_files=["res://.godot/imported/Miner character idle.png-2d95f38e709e2deed29a241e85ff3c37.ctex"]
 
 [params]
 

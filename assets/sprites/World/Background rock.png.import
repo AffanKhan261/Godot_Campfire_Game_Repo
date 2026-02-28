@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b74m2xcn4mq25"
-path="res://.godot/imported/Top layer rock.png-3d1d52fc20a145ce0f9778d2fe6e685e.ctex"
+uid="uid://u7pr8oth65po"
+path="res://.godot/imported/Background rock.png-1d16746f699cb1310f03d2026821a24d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Top layer rock.png"
-dest_files=["res://.godot/imported/Top layer rock.png-3d1d52fc20a145ce0f9778d2fe6e685e.ctex"]
+source_file="res://assets/sprites/World/Background rock.png"
+dest_files=["res://.godot/imported/Background rock.png-1d16746f699cb1310f03d2026821a24d.ctex"]
 
 [params]
 

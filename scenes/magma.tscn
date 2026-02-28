@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dl5vm7svnl5eb"]
 
-[ext_resource type="Texture2D" uid="uid://d4e6o0xn7lvgi" path="res://assets/sprites/magma.png" id="1_88ox0"]
+[ext_resource type="Texture2D" uid="uid://d4e6o0xn7lvgi" path="res://assets/sprites/World/magma.png" id="1_88ox0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g1gu6"]
 atlas = ExtResource("1_88ox0")
@@ -42,4 +42,4 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1714763309]
 sprite_frames = SubResource("SpriteFrames_450e0")
-frame_progress = 0.85180527
+frame_progress = 0.87606275
