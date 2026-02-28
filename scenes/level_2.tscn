@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bqqf6dxdg7cqj" path="res://assets/caverns-files-web/Caverns-preview.jpg" id="1_3bmlt"]
 [ext_resource type="Texture2D" uid="uid://c8wn7tjp3wsg4" path="res://assets/106a666b-6946-472e-9cf0-438f03d56019.jpg" id="1_jm1iu"]
 [ext_resource type="PackedScene" uid="uid://c36k1aoitnyaq" path="res://scenes/miner_player.tscn" id="3_pbc48"]
+[ext_resource type="PackedScene" uid="uid://bbowjbwbtspk6" path="res://scenes/fire_golem.tscn" id="4_eqxsl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jm1iu"]
 texture = ExtResource("1_3bmlt")
@@ -866,3 +867,6 @@ position = Vector2(0, -22)
 
 [node name="Camera2D" type="Camera2D" parent="MinerPlayer" unique_id=2083367490]
 zoom = Vector2(4, 4)
+
+[node name="Fire Golem" parent="." unique_id=1031691470 instance=ExtResource("4_eqxsl")]
+position = Vector2(169, -66)
