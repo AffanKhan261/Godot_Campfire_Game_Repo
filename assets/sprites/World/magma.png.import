@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u7pr8oth65po"
-path="res://.godot/imported/Background rock.png-adad641670b6d2d603d1ae7f63378d5a.ctex"
+uid="uid://d4e6o0xn7lvgi"
+path="res://.godot/imported/magma.png-7124129f64828a0b3fcdacb8496f6b2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Background rock.png"
-dest_files=["res://.godot/imported/Background rock.png-adad641670b6d2d603d1ae7f63378d5a.ctex"]
+source_file="res://assets/sprites/World/magma.png"
+dest_files=["res://.godot/imported/magma.png-7124129f64828a0b3fcdacb8496f6b2d.ctex"]
 
 [params]
 
