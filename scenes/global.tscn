@@ -4,3 +4,5 @@
 
 [node name="global" type="Node" unique_id=1278496095]
 script = ExtResource("1_4pk28")
+
+[connection signal="ready" from="." to="." method="_on_ready"]

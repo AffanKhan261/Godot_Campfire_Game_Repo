@@ -243,30 +243,36 @@ func _update_facing_and_flip(delta: float) -> void:
 
 # ---------------- ANIMATIONS ----------------
 func _update_animations() -> void:
-	# Don't override the attack animation while attacking
-	if is_attacking:
-		return
+	if GlobalVar.HEALTH > 0:
+		# Don't override the attack animation while attacking
+		if is_attacking:
+			return
 
-	# Use "walk" for dash
-	if is_dashing:
-		if animated_sprite.animation != "walk":
-			animated_sprite.play("walk")
-		return
-
-	if is_on_floor():
-		if absf(velocity.x) < 5.0:
-			if animated_sprite.animation != "idle":
-				animated_sprite.play("idle")
-		else:
+		# Use "walk" for dash
+		if is_dashing:
 			if animated_sprite.animation != "walk":
 				animated_sprite.play("walk")
+			return
+
+		if is_on_floor():
+			if absf(velocity.x) < 5.0:
+				if animated_sprite.animation != "idle":
+					animated_sprite.play("idle")
+			else:
+				if animated_sprite.animation != "walk":
+					animated_sprite.play("walk")
+		else:
+			if velocity.y < 0.0 and animated_sprite.sprite_frames.has_animation("jump"):
+				if animated_sprite.animation != "jump":
+					animated_sprite.play("jump")
+			elif velocity.y >= 0.0 and animated_sprite.sprite_frames.has_animation("fall"):
+				if animated_sprite.animation != "fall":
+					animated_sprite.play("fall")
 	else:
-		if velocity.y < 0.0 and animated_sprite.sprite_frames.has_animation("jump"):
-			if animated_sprite.animation != "jump":
-				animated_sprite.play("jump")
-		elif velocity.y >= 0.0 and animated_sprite.sprite_frames.has_animation("fall"):
-			if animated_sprite.animation != "fall":
-				animated_sprite.play("fall")
+		#stops all player input
+		animated_sprite.play("death")
+		await get_tree().create_timer(2).timeout
+		#get_tree().reload_current_scene()
 
 func get_facing() -> int:
 	return facing
