@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b74m2xcn4mq25"
-path="res://.godot/imported/Top layer rock.png-3d1d52fc20a145ce0f9778d2fe6e685e.ctex"
+uid="uid://d1paojrjcjjro"
+path="res://.godot/imported/tiles.png-217370e14695803c8cefb770d8565635.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Top layer rock.png"
-dest_files=["res://.godot/imported/Top layer rock.png-3d1d52fc20a145ce0f9778d2fe6e685e.ctex"]
+source_file="res://assets/caverns-files-web/layers/tiles.png"
+dest_files=["res://.godot/imported/tiles.png-217370e14695803c8cefb770d8565635.ctex"]
 
 [params]
 

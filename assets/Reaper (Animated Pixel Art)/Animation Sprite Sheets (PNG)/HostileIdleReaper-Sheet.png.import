@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4e6o0xn7lvgi"
-path="res://.godot/imported/magma.png-739fc1fefc7359ac822038a31f2d4656.ctex"
+uid="uid://bahqnwr1d7pia"
+path="res://.godot/imported/HostileIdleReaper-Sheet.png-c178260c3d9b20224b9d708862d455fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/magma.png"
-dest_files=["res://.godot/imported/magma.png-739fc1fefc7359ac822038a31f2d4656.ctex"]
+source_file="res://assets/Reaper (Animated Pixel Art)/Animation Sprite Sheets (PNG)/HostileIdleReaper-Sheet.png"
+dest_files=["res://.godot/imported/HostileIdleReaper-Sheet.png-c178260c3d9b20224b9d708862d455fa.ctex"]
 
 [params]
 
