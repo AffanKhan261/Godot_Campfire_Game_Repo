@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bwitqrbdl5dol" path="res://assets/sprites/World/rock corners reverse.png" id="3_pa8r4"]
 [ext_resource type="AudioStream" uid="uid://bvr0xby76dp5b" path="res://assets/audio_music (remember to credit)/[Prologue]Rivals Of Aether - Anomalous.mp3" id="4_5xbjy"]
 [ext_resource type="Texture2D" uid="uid://fmkktrh8prew" path="res://assets/sprites/World/rock corners.png" id="4_pa8r4"]
+[ext_resource type="PackedScene" uid="uid://cw0ou7prfeuai" path="res://scenes/light_orb.tscn" id="6_15mv3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_014kd"]
 texture = ExtResource("1_014kd")
@@ -96,3 +97,6 @@ zoom = Vector2(2.5, 2.5)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1307639341]
 stream = ExtResource("4_5xbjy")
 autoplay = true
+
+[node name="Light Orb" parent="." unique_id=391582249 instance=ExtResource("6_15mv3")]
+position = Vector2(57, -279)

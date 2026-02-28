@@ -300,10 +300,22 @@ func _update_facing_and_flip(delta: float) -> void:
 # ---------------- ANIMATIONS ----------------
 func _update_animations() -> void:
 
+
+
 	if GlobalVar.HEALTH > 0:
 		# Don't override the attack animation while attacking
 		if is_attacking:
 			return
+
+
+		# Death has priority
+		if is_dead:
+			return
+
+		# Don't override the attack animation while attacking
+		if is_attacking:
+			return
+
 
 		# Death has priority
 		if is_dead:
