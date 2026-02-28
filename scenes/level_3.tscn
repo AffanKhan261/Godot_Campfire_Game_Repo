@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bkhbr7f24g1ax"]
 
-[ext_resource type="AudioStream" uid="uid://nrslr5mn0imq" path="res://assets/music (remember to credit)/[Chapter 2]Dead Cells - The Crypt.mp3" id="1_70nk6"]
+[ext_resource type="AudioStream" uid="uid://nrslr5mn0imq" path="res://assets/audio_music (remember to credit)/[Chapter 2]Dead Cells - The Crypt.mp3" id="1_70nk6"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_70nk6"]
 distance = -126.0

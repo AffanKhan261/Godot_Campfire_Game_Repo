@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bbdju5oqh1k4" path="res://scripts/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://c7xka82uc1hib" path="res://assets/infernal-dark-cave-with-lava-scene/50656.jpg" id="1_ekxnf"]
 [ext_resource type="FontFile" uid="uid://bbfm0q7fajwvn" path="res://assets/PressStart2P-Regular.ttf" id="1_l6cm7"]
-[ext_resource type="AudioStream" uid="uid://bgisx1rv8rh70" path="res://assets/music (remember to credit)/[Main Menu]ULTRAKILL - The Fire Is Gone.mp3" id="4_wu84c"]
+[ext_resource type="AudioStream" uid="uid://bgisx1rv8rh70" path="res://assets/audio_music (remember to credit)/[Main Menu]ULTRAKILL - The Fire Is Gone.mp3" id="4_wu84c"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bqqt6"]
 texture = ExtResource("1_ekxnf")
