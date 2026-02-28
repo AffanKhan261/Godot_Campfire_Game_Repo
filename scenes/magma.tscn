@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://dl5vm7svnl5eb"]
+[gd_scene format=3 uid="uid://bnwh3cy3tggkl"]
 
 [ext_resource type="Texture2D" uid="uid://d4e6o0xn7lvgi" path="res://assets/sprites/World/magma.png" id="1_88ox0"]
+[ext_resource type="Script" uid="uid://c683l2lrb3bmd" path="res://scripts/magma.gd" id="1_g1gu6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g1gu6"]
 atlas = ExtResource("1_88ox0")
@@ -38,8 +39,22 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Magma" type="Node2D" unique_id=482492784]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_88ox0"]
+size = Vector2(34, 34)
+
+[node name="Magma" type="Area2D" unique_id=806916145]
+z_index = 2
+collision_mask = 2
+script = ExtResource("1_g1gu6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1714763309]
 sprite_frames = SubResource("SpriteFrames_450e0")
-frame_progress = 0.87606275
+autoplay = "default"
+frame_progress = 0.5186153
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=769872392]
+z_index = 2
+shape = SubResource("RectangleShape2D_88ox0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

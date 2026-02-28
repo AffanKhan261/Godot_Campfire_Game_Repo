@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cw0ou7prfeuai"]
 
 [ext_resource type="Texture2D" uid="uid://cseprmxq4omlj" path="res://assets/sprites/Light orb.png" id="1_m7w4g"]
-[ext_resource type="Script" uid="uid://coykfvlay5kyp" path="res://scenes/light_orb.gd" id="1_q02b5"]
+[ext_resource type="Script" uid="uid://coykfvlay5kyp" path="res://scripts/light_orb.gd" id="1_q02b5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q02b5"]
 atlas = ExtResource("1_m7w4g")
@@ -39,7 +39,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_q02b5"]
+radius = 8.0
+
 [node name="Light Orb" type="Area2D" unique_id=391582249]
+collision_mask = 2
 script = ExtResource("1_q02b5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=943782348]
@@ -49,3 +53,6 @@ frame = 2
 frame_progress = 0.9238935
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=506176294]
+shape = SubResource("CircleShape2D_q02b5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://d3t5ipx4ydmdr"]
+
+[ext_resource type="Script" uid="uid://bpwgvp8scmfw2" path="res://scripts/lava.gd" id="1_dw3wf"]
+[ext_resource type="Texture2D" uid="uid://ctli3oaqbd3du" path="res://assets/sprites/World/Lava.png" id="2_snnrc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f10td"]
+size = Vector2(28, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3w25c"]
+atlas = ExtResource("2_snnrc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxvwp"]
+atlas = ExtResource("2_snnrc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgx88"]
+atlas = ExtResource("2_snnrc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w488u"]
+atlas = ExtResource("2_snnrc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c1ovw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3w25c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxvwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgx88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w488u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Lava" type="Area2D" unique_id=165702657]
+collision_mask = 2
+script = ExtResource("1_dw3wf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1607670180]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_f10td")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=495907135]
+sprite_frames = SubResource("SpriteFrames_c1ovw")
+autoplay = "default"
+frame_progress = 0.38370478
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
