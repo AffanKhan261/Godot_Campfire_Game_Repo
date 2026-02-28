@@ -7,7 +7,9 @@ func _on_body_entered(body: Node2D) -> void:
 	while GlobalVar.HEALTH > 0 and magma_damage_check == true:
 		GlobalVar.HEALTH -= 100
 		print(GlobalVar.HEALTH)
+		GlobalVar.damage_anim_enabler = true
 		await get_tree().create_timer(0.25).timeout
+		GlobalVar.damage_anim_enabler = false
 	print("out of loop check")
 
 
