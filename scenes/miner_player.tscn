@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://hrs1soljsuru" path="res://assets/sprites/Player/Miner character idle.png" id="1_sldkq"]
 [ext_resource type="Texture2D" uid="uid://cy1is216nxvbc" path="res://assets/sprites/Player/Miner character 1.png" id="3_3pmy6"]
 [ext_resource type="Texture2D" uid="uid://bguvv1ohsel6s" path="res://assets/sprites/Player/Miner character jump.png" id="3_ieu5k"]
+[ext_resource type="Texture2D" uid="uid://eriujl1frf8s" path="res://assets/sprites/Player/Miner character damage.png" id="3_xrcab"]
 [ext_resource type="Texture2D" uid="uid://clc3v1iipo2oe" path="res://assets/sprites/Player/Miner character attack.png" id="4_f038o"]
 [ext_resource type="Texture2D" uid="uid://b4ul7e22pdwuo" path="res://assets/sprites/Player/Mine character death.png" id="5_agh33"]
 
@@ -30,6 +31,38 @@ region = Rect2(128, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_d4vlq"]
 atlas = ExtResource("4_f038o")
 region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24386"]
+atlas = ExtResource("3_xrcab")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_728ll"]
+atlas = ExtResource("3_xrcab")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eixis"]
+atlas = ExtResource("3_xrcab")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npd8w"]
+atlas = ExtResource("3_xrcab")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywq7f"]
+atlas = ExtResource("3_xrcab")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0egs"]
+atlas = ExtResource("3_xrcab")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blitr"]
+atlas = ExtResource("3_xrcab")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrwma"]
+atlas = ExtResource("3_xrcab")
+region = Rect2(224, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e0aj0"]
 atlas = ExtResource("5_agh33")
@@ -134,6 +167,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_24386")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_728ll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eixis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npd8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywq7f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0egs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blitr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrwma")
+}],
+"loop": false,
+"name": &"damage",
+"speed": 35.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_e0aj0")
 }, {
 "duration": 1.0,
@@ -191,7 +253,7 @@ animations = [{
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_2hjl3")
 }, {
-"duration": 5.0,
+"duration": 100.0,
 "texture": SubResource("AtlasTexture_op468")
 }],
 "loop": true,
@@ -223,7 +285,7 @@ script = ExtResource("1_iyavu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1800577890]
 sprite_frames = SubResource("SpriteFrames_agh33")
-animation = &"idle"
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=621166794]
 position = Vector2(0.5, 1)

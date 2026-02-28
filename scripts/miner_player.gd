@@ -303,52 +303,42 @@ func _update_animations() -> void:
 
 
 	if GlobalVar.HEALTH > 0:
-		# Don't override the attack animation while attacking
-		if is_attacking:
-			return
+		if GlobalVar.damage_anim_enabler == false:
+			# Don't override the attack animation while attacking
+			if is_attacking:
+				return
 
 
-		# Death has priority
-		if is_dead:
-			return
+			# Death has priority
+			if is_dead:
+				return
 
-		# Don't override the attack animation while attacking
-		if is_attacking:
-			return
-
-
-		# Death has priority
-		if is_dead:
-			return
-
-		# Don't override the attack animation while attacking
-		if is_attacking:
-			return
-
-
-		# Use "walk" for dash
-		if is_dashing:
-			if animated_sprite.animation != "walk":
-				animated_sprite.play("walk")
-			return
-
-		if is_on_floor():
-			if absf(velocity.x) < 5.0:
-				if animated_sprite.animation != "idle":
-					animated_sprite.play("idle")
-			else:
+			# Use "walk" for dash
+			if is_dashing:
 				if animated_sprite.animation != "walk":
 					animated_sprite.play("walk")
+				return
+
+			if is_on_floor():
+				if absf(velocity.x) < 5.0:
+					if animated_sprite.animation != "idle":
+						animated_sprite.play("idle")
+				else:
+					if animated_sprite.animation != "walk":
+						animated_sprite.play("walk")
+			else:
+				if velocity.y < 0.0 and animated_sprite.sprite_frames.has_animation("jump"):
+					if animated_sprite.animation != "jump":
+						animated_sprite.play("jump")
+				elif velocity.y >= 0.0 and animated_sprite.sprite_frames.has_animation("fall"):
+					if animated_sprite.animation != "fall":
+						animated_sprite.play("fall")
 		else:
-			if velocity.y < 0.0 and animated_sprite.sprite_frames.has_animation("jump"):
-				if animated_sprite.animation != "jump":
-					animated_sprite.play("jump")
-			elif velocity.y >= 0.0 and animated_sprite.sprite_frames.has_animation("fall"):
-				if animated_sprite.animation != "fall":
-					animated_sprite.play("fall")
+			animated_sprite.play("damage")
 	else:
-		#stops all player input
 		animated_sprite.play("death")
+		await get_tree().create_timer(1.575).timeout
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func get_facing() -> int:
 	return facing
