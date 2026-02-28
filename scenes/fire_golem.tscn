@@ -1,24 +1,86 @@
 [gd_scene format=3 uid="uid://bbowjbwbtspk6"]
 
+[ext_resource type="Texture2D" uid="uid://barwc814lsfh1" path="res://assets/sprites/fire golem boss/Fire golem(64x64).png" id="1_y2kyn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ijwo"]
+atlas = ExtResource("1_y2kyn")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0h103"]
+atlas = ExtResource("1_y2kyn")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61q5b"]
+atlas = ExtResource("1_y2kyn")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0t0xf"]
+atlas = ExtResource("1_y2kyn")
+region = Rect2(192, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_mkyw6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ijwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0h103")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61q5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0t0xf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_schcc"]
+height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y2kyn"]
+height = 26.0
 
 [node name="Fire Golem" type="CharacterBody2D" unique_id=1031691470]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=340814310]
 sprite_frames = SubResource("SpriteFrames_mkyw6")
+frame = 3
+frame_progress = 0.80678064
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=857063392]
+visible = false
+position = Vector2(-1, 1)
+shape = SubResource("CapsuleShape2D_schcc")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=103136510]
+[node name="HurtBox" type="Area2D" parent="." unique_id=103136510]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1890901481]
+position = Vector2(-1, 2)
+shape = SubResource("CapsuleShape2D_y2kyn")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1703524848]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=2109481062]
+disabled = true
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=251071698]
+visible = false
 
 [node name="RayCast2D2" type="RayCast2D" parent="." unique_id=831661436]
+visible = false
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1851501141]
 
 [node name="Timer" type="Timer" parent="." unique_id=1523585988]
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1755480575]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=638857630]
+
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=1366973228]
