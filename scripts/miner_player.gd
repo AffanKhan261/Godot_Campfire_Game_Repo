@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var attack_area: Area2D = $AttackArea2D
+@onready var attack_shape: CollisionShape2D = $AttackArea2D/CollisionShape2D
 
 # ---------------- MOVE ----------------
 const SPEED: float = 250.0
@@ -31,6 +33,20 @@ var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var dash_dir: int = 1 # -1 left, +1 right
 
+# ---------------- ATTACK (action = attack, keybind F) ----------------
+@export var attack_damage: int = 25
+
+# How long the hitbox is active (damage window)
+@export var attack_active_time: float = 0.12
+
+# How long we stay in "attacking" state (animation lock window)
+@export var attack_total_time: float = 0.30
+
+@export var attack_cooldown: float = 0.25
+
+var is_attacking: bool = false
+var attack_cooldown_timer: float = 0.0
+
 # ---------------- FACING (smooth) ----------------
 var facing: int = 1
 var facing_blend: float = 1.0
@@ -40,13 +56,24 @@ const FACING_SMOOTH: float = 18.0
 var was_on_floor: bool = false
 
 func _ready() -> void:
-	# Initialize landing state correctly (important if player spawns on ground)
 	was_on_floor = is_on_floor()
+
+	# Tag hitbox so boss can detect it via area.is_in_group("player_attack")
+	attack_area.add_to_group("player_attack")
+
+	# IMPORTANT: attack rectangle OFF by default
+	attack_area.monitoring = false
+	attack_shape.disabled = true
 
 func _physics_process(delta: float) -> void:
 	_update_dash_timers(delta)
+	_update_attack_timers(delta)
 
-	# Dash input (your action name)
+	# Attack input (Input Map action name: "attack" bound to F)
+	if Input.is_action_just_pressed("attack"):
+		_try_attack()
+
+	# Dash input
 	if Input.is_action_just_pressed("speed_dash"):
 		_try_start_dash()
 
@@ -67,8 +94,11 @@ func _physics_process(delta: float) -> void:
 	# Horizontal movement
 	if is_dashing:
 		_perform_dash_motion()
-	else:
+	elif not is_attacking:
 		_handle_horizontal_movement(delta)
+	else:
+		# lock/slow movement during attack
+		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
 
 	# Smooth flip
 	_update_facing_and_flip(delta)
@@ -80,6 +110,45 @@ func _physics_process(delta: float) -> void:
 
 	# ONLY reset jumps when you LAND on the ground
 	_post_move_floor_reset()
+
+# ---------------- ATTACK ----------------
+func get_damage() -> int:
+	return attack_damage
+
+func _try_attack() -> void:
+	if is_attacking:
+		return
+	if attack_cooldown_timer > 0.0:
+		return
+	if is_dashing:
+		return
+	if not animated_sprite.sprite_frames.has_animation("attack"):
+		return
+
+	is_attacking = true
+	attack_cooldown_timer = attack_cooldown
+	animated_sprite.play("attack")
+
+	# Put hitbox on the correct side (in front of player)
+	attack_area.position.x = absf(attack_area.position.x) * float(get_facing())
+
+	# Enable hitbox ONLY during active frames
+	attack_area.monitoring = true
+	attack_shape.disabled = false
+
+	get_tree().create_timer(attack_active_time).timeout.connect(func() -> void:
+		attack_shape.disabled = true
+		attack_area.monitoring = false
+	)
+
+	# End attack state after total time (so animations can resume)
+	get_tree().create_timer(attack_total_time).timeout.connect(func() -> void:
+		is_attacking = false
+	)
+
+func _update_attack_timers(delta: float) -> void:
+	if attack_cooldown_timer > 0.0:
+		attack_cooldown_timer -= delta
 
 # ---------------- FLOOR RESET ----------------
 func _post_move_floor_reset() -> void:
@@ -104,14 +173,11 @@ func _handle_jump() -> void:
 	if not Input.is_action_just_pressed("jump"):
 		return
 
-	# Wall jump has priority if we're touching a wall (or within grace window) and not on floor
+	# Wall jump priority
 	if not is_on_floor() and (is_on_wall_only() or WALL_STICK_TIMER > 0.0):
 		var n: Vector2 = get_wall_normal()
 		velocity.y = WALL_JUMP_VELOCITY
 		velocity.x = n.x * WALL_JUMP_PUSH
-
-		# IMPORTANT: wall jump does NOT reset/refund double jump
-		# JUMPS_LEFT stays as-is
 
 		if absf(velocity.x) > 0.01:
 			facing = -1 if velocity.x < 0.0 else 1
@@ -130,6 +196,8 @@ func _handle_jump() -> void:
 # ---------------- DASH ----------------
 func _try_start_dash() -> void:
 	if is_dashing or dash_cooldown_timer > 0.0:
+		return
+	if is_attacking:
 		return
 
 	var input_dir: float = Input.get_axis("move_left", "move_right")
@@ -167,7 +235,6 @@ func _update_dash_timers(delta: float) -> void:
 
 # ---------------- FACING / FLIP ----------------
 func _update_facing_and_flip(delta: float) -> void:
-	# During dash, lock facing to dash_dir
 	if is_dashing:
 		facing = dash_dir
 
@@ -176,7 +243,11 @@ func _update_facing_and_flip(delta: float) -> void:
 
 # ---------------- ANIMATIONS ----------------
 func _update_animations() -> void:
-	# You requested: use "walk" animation for dash too
+	# Don't override the attack animation while attacking
+	if is_attacking:
+		return
+
+	# Use "walk" for dash
 	if is_dashing:
 		if animated_sprite.animation != "walk":
 			animated_sprite.play("walk")
@@ -197,6 +268,5 @@ func _update_animations() -> void:
 			if animated_sprite.animation != "fall":
 				animated_sprite.play("fall")
 
-# Optional: expose facing for boss "face-to-face" logic
 func get_facing() -> int:
 	return facing

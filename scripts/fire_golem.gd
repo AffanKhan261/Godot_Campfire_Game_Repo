@@ -22,6 +22,10 @@ enum State { IDLE, CHASE, ATTACK_MELEE, ATTACK_RANGED, STAGGER, DEAD }
 # Placeholder damage (until you implement player health)
 @export var contact_damage: int = 10
 
+# --- Damage intake tuning (prevents multi-hit spam) ---
+@export var damage_i_frame_time: float = 0.15 # seconds of immunity per hit source
+var _last_hit_time_by_source: Dictionary = {}
+
 var health: int
 var state: State = State.IDLE
 
@@ -48,6 +52,10 @@ func _ready() -> void:
 	# HitBox should only be active during melee frames
 	if hit_box:
 		hit_box.monitoring = false
+
+	# HurtBox should always be able to receive hits
+	if hurt_box:
+		hurt_box.monitoring = true
 
 func _physics_process(delta: float) -> void:
 	if state == State.DEAD:
@@ -116,18 +124,15 @@ func _start_melee_attack() -> void:
 	attack_cooldown.start(melee_cooldown)
 
 	# Face-to-face requirement:
-	# You asked to attack in the opposite direction that the player is facing.
-	# This assumes the player has a property `facing` (float/int: -1 left, +1 right)
-	# If it doesn't exist, we fall back to facing the player.
+	# Attack in the opposite direction that the player is facing.
+	# This assumes the player has a method `get_facing()` or a property `facing`.
 	var desired_facing: float = facing
 
-	# Try to read player's facing safely
 	if player != null and player.has_method("get_facing"):
 		desired_facing = float(player.call("get_facing")) * -1.0
 	elif player != null and "facing" in player:
 		desired_facing = float(player.get("facing")) * -1.0
 
-	# If we got a usable value, apply it; otherwise keep current facing-to-player
 	if desired_facing != 0.0:
 		facing = signf(desired_facing)
 
@@ -136,11 +141,10 @@ func _start_melee_attack() -> void:
 
 	anim.play("punch")
 
-	# Enable hitbox briefly (simple timing-based approach)
+	# Enable hitbox briefly (timing-based)
 	if hit_box:
 		hit_box.monitoring = false
 		await get_tree().create_timer(melee_windup).timeout
-		# Only activate if still in melee attack state
 		if state == State.ATTACK_MELEE:
 			hit_box.monitoring = true
 			await get_tree().create_timer(melee_active_time).timeout
@@ -185,12 +189,31 @@ func _play_walk() -> void:
 	if anim.animation != "walk":
 		anim.play("walk")
 
+# --- PLAYER ATTACK HITS BOSS HERE ---
 func _on_hurt_box_area_entered(area: Area2D) -> void:
-	# You don't have player attacks yet, so ignore everything unless you later
-	# add attacks to a group called "player_attack".
+	if state == State.DEAD:
+		return
+
+	# Only accept hits from player attack hitboxes
 	if not area.is_in_group("player_attack"):
 		return
-	_take_damage(25)
+
+	# --- Anti multi-hit (per attacker area instance) ---
+	var id := area.get_instance_id()
+	var now := Time.get_ticks_msec() / 1000.0
+	var last := float(_last_hit_time_by_source.get(id, -9999.0))
+	if now - last < damage_i_frame_time:
+		return
+	_last_hit_time_by_source[id] = now
+
+	# Optional: let the attack area define its own damage
+	var dmg := 25
+	if area.has_method("get_damage"):
+		dmg = int(area.call("get_damage"))
+	elif "damage" in area:
+		dmg = int(area.get("damage"))
+
+	_take_damage(dmg)
 
 func _on_hit_box_body_entered(body: Node2D) -> void:
 	if body == player:
@@ -202,11 +225,14 @@ func _take_damage(amount: int) -> void:
 		return
 
 	health = max(health - amount, 0)
+	print("Boss health:", health)
 
 	if health == 0:
 		state = State.DEAD
 		if hit_box:
 			hit_box.monitoring = false
+		if hurt_box:
+			hurt_box.monitoring = false
 		anim.play("hurt") # replace with death animation if you have one
 		return
 
