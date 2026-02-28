@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://fmkktrh8prew" path="res://assets/sprites/World/rock corners.png" id="4_pa8r4"]
 [ext_resource type="PackedScene" uid="uid://cw0ou7prfeuai" path="res://scenes/light_orb.tscn" id="6_15mv3"]
 [ext_resource type="PackedScene" uid="uid://d3t5ipx4ydmdr" path="res://scenes/lava.tscn" id="9_e3sih"]
-[ext_resource type="PackedScene" uid="uid://bnwh3cy3tggkl" path="res://scenes/magma.tscn" id="10_2y5yt"]
+[ext_resource type="PackedScene" uid="uid://dl5vm7svnl5eb" path="res://scenes/magma.tscn" id="10_2y5yt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_014kd"]
 texture = ExtResource("1_014kd")
