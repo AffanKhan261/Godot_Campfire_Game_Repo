@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://nrslr5mn0imq"
+path="res://.godot/imported/[Chapter 2]Dead Cells - The Crypt.mp3-ce75b881bc308f5477b871f07b87f51b.mp3str"
+
+[deps]
+
+source_file="res://assets/music (remember to credit)/[Chapter 2]Dead Cells - The Crypt.mp3"
+dest_files=["res://.godot/imported/[Chapter 2]Dead Cells - The Crypt.mp3-ce75b881bc308f5477b871f07b87f51b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
