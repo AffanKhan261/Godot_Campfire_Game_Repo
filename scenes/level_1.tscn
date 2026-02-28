@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bi7qh3b5b54iv"]
+
+[ext_resource type="Texture2D" uid="uid://b74m2xcn4mq25" path="res://assets/sprites/Top layer rock.png" id="1_014kd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_014kd"]
+texture = ExtResource("1_014kd")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_bswci"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_014kd")
+
+[node name="level1" type="Node2D" unique_id=1894671635]
+
+[node name="TileMap" type="TileMap" parent="." unique_id=1327201460]
+tile_set = SubResource("TileSet_bswci")
+format = 2
