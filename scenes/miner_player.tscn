@@ -151,5 +151,5 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=375401769]
-position = Vector2(15.5, 1)
+position = Vector2(12, 1)
 shape = SubResource("RectangleShape2D_ieu5k")
