@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 # ---------------- MOVE ----------------
-const SPEED: float = 300.0
+const SPEED: float = 250.0
 const WALK_ACCEL: float = 1800.0
 const FRICTION: float = 2200.0
 
@@ -11,13 +11,13 @@ const FRICTION: float = 2200.0
 const JUMP_VELOCITY: float = -400.0
 const DOUBLE_JUMP_VELOCITY: float = -380.0
 const MAX_JUMPS: int = 2
-var jumps_left: int = MAX_JUMPS
+var JUMPS_LEFT: int = MAX_JUMPS
 
 # ---------------- WALL JUMP -----------
 const WALL_JUMP_PUSH: float = 420.0
 const WALL_JUMP_VELOCITY: float = -420.0
 const WALL_STICK_TIME: float = 0.12
-var wall_stick_timer: float = 0.0
+var WALL_STICK_TIMER: float = 0.0
 
 # ---------------- DASH (tap dash, action = speed_dash) ----------------
 const DASH_SPEED: float = 600.0
@@ -56,9 +56,9 @@ func _physics_process(delta: float) -> void:
 
 	# Wall contact grace timer (only while in air, and not dashing)
 	if not is_on_floor() and not is_dashing and is_on_wall_only():
-		wall_stick_timer = WALL_STICK_TIME
+		WALL_STICK_TIMER = WALL_STICK_TIME
 	else:
-		wall_stick_timer = maxf(0.0, wall_stick_timer - delta)
+		WALL_STICK_TIMER = maxf(0.0, WALL_STICK_TIMER - delta)
 
 	# Jump / double jump / wall jump
 	if not is_dashing:
@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 func _post_move_floor_reset() -> void:
 	var on_floor_now: bool = is_on_floor()
 	if on_floor_now and not was_on_floor:
-		jumps_left = MAX_JUMPS
+		JUMPS_LEFT = MAX_JUMPS
 	was_on_floor = on_floor_now
 
 # ---------------- HORIZONTAL MOVEMENT ----------------
@@ -105,27 +105,27 @@ func _handle_jump() -> void:
 		return
 
 	# Wall jump has priority if we're touching a wall (or within grace window) and not on floor
-	if not is_on_floor() and (is_on_wall_only() or wall_stick_timer > 0.0):
+	if not is_on_floor() and (is_on_wall_only() or WALL_STICK_TIMER > 0.0):
 		var n: Vector2 = get_wall_normal()
 		velocity.y = WALL_JUMP_VELOCITY
 		velocity.x = n.x * WALL_JUMP_PUSH
 
 		# IMPORTANT: wall jump does NOT reset/refund double jump
-		# jumps_left stays as-is
+		# JUMPS_LEFT stays as-is
 
 		if absf(velocity.x) > 0.01:
 			facing = -1 if velocity.x < 0.0 else 1
 
-		wall_stick_timer = 0.0
+		WALL_STICK_TIMER = 0.0
 		return
 
 	# Normal jump / double jump
-	if jumps_left > 0:
-		if jumps_left == MAX_JUMPS:
+	if JUMPS_LEFT > 0:
+		if JUMPS_LEFT == MAX_JUMPS:
 			velocity.y = JUMP_VELOCITY
 		else:
 			velocity.y = DOUBLE_JUMP_VELOCITY
-		jumps_left -= 1
+		JUMPS_LEFT -= 1
 
 # ---------------- DASH ----------------
 func _try_start_dash() -> void:
