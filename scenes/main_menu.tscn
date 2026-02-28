@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://klwod7wfsxh3"]
 
+[ext_resource type="Script" uid="uid://bbdju5oqh1k4" path="res://scripts/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://c7xka82uc1hib" path="res://assets/infernal-dark-cave-with-lava-scene/50656.jpg" id="1_ekxnf"]
 [ext_resource type="FontFile" uid="uid://bbfm0q7fajwvn" path="res://assets/PressStart2P-Regular.ttf" id="1_l6cm7"]
 
@@ -18,6 +19,13 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+bg_color = Color(0.5137255, 0.35686275, 0.15294118, 0.827451)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
 bg_color = Color(0.5137255, 0.35686275, 0.15294118, 0.6392157)
 corner_radius_top_left = 12
@@ -25,8 +33,8 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oa1go"]
+bg_color = Color(0.5137255, 0.35686275, 0.15294118, 0.827451)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -40,21 +48,14 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ln24"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.5137255, 0.35686275, 0.15294118, 0.827451)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtw2f"]
-bg_color = Color(0.5137255, 0.35686275, 0.15294118, 0.6392157)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oa1go"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jk1qb"]
+bg_color = Color(0.5137255, 0.35686275, 0.15294118, 0.827451)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -67,8 +68,11 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jk1qb"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtw2f"]
+bg_color = Color(0.74109906, 0.36523208, 0.09714011, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dd4i"]
+bg_color = Color(0.80784315, 0.2784314, 0, 0.47843137)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -83,8 +87,9 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_bqqt6")
 
-[node name="Panel" type="Panel" parent="." unique_id=1373893451]
+[node name="Background" type="Panel" parent="." unique_id=1373893451]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -99,22 +104,22 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_bqqt6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1759762795]
+[node name="MainButtons" type="VBoxContainer" parent="." unique_id=1759762795]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -223.0
-offset_top = -150.0
-offset_right = 278.5
-offset_bottom = 295.0
+offset_left = -250.75
+offset_top = -47.0
+offset_right = 250.75
+offset_bottom = 283.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Start Button" type="Button" parent="VBoxContainer" unique_id=1784897486]
+[node name="Start Button" type="Button" parent="MainButtons" unique_id=1784897486]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 8
@@ -126,11 +131,12 @@ theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_bqqt6")
 text = "Start"
 
-[node name="Settings" type="Button" parent="VBoxContainer" unique_id=1131474758]
+[node name="Settings" type="Button" parent="MainButtons" unique_id=1131474758]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -141,11 +147,12 @@ theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oa1go")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wu84c")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_8ln24")
 text = "Settings"
 
-[node name="How to play" type="Button" parent="VBoxContainer" unique_id=490009178]
+[node name="Exit" type="Button" parent="MainButtons" unique_id=1097001551]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -156,21 +163,81 @@ theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rtw2f")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_oa1go")
-text = "How to play"
-
-[node name="Exit" type="Button" parent="VBoxContainer" unique_id=1097001551]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_l6cm7")
-theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jk1qb")
 theme_override_styles/hover = SubResource("StyleBoxFlat_tbmy8")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_jk1qb")
 text = "Exit"
+
+[node name="Title" type="Label" parent="." unique_id=1839196035]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -39.0
+offset_top = -196.0
+offset_right = 39.0
+offset_bottom = -173.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.5564672, 0.256697, 0.12527785, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 70
+text = "Infernal Heart"
+
+[node name="Settings" type="Panel" parent="." unique_id=1877642773]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.5
+offset_top = -123.0
+offset_right = 278.5
+offset_bottom = 310.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rtw2f")
+
+[node name="Label" type="Label" parent="Settings" unique_id=663097548]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 11.0
+offset_right = 200.0
+offset_bottom = 61.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+
+[node name="BackButton" type="Button" parent="Settings" unique_id=74995856]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -141.25
+offset_top = -104.0
+offset_right = 141.25
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_5dd4i")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5dd4i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5dd4i")
+text = "Back"
+
+[connection signal="pressed" from="MainButtons/Start Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainButtons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MainButtons/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Settings/BackButton" to="." method="_on_back_button_pressed"]
