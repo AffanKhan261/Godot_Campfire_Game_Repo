@@ -43,6 +43,14 @@ speed_dash={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="boss"
+2d_physics/layer_4="player_attack"
+2d_physics/layer_5="boss_attack"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
