@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bkhbr7f24g1ax"]
+[gd_scene format=3 uid="uid://deg1j7gmwskt2"]
 
 [ext_resource type="AudioStream" uid="uid://ciw2oawelfad1" path="res://assets/audio_music (remember to credit)/[Chapter 1]ULTRAKILL - A Heart of Cold.mp3" id="1_3bmlt"]
 [ext_resource type="PackedScene" uid="uid://c36k1aoitnyaq" path="res://scenes/miner_player.tscn" id="3_pbc48"]

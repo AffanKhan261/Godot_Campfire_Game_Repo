@@ -3,6 +3,12 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $AttackArea2D
 @onready var attack_shape: CollisionShape2D = $AttackArea2D/CollisionShape2D
+@onready var fireblast_area: Area2D = $Fireblast
+@onready var fireblast_shape: CollisionShape2D = $Fireblast/fireblast_shape
+@onready var fireblast_anim: AnimatedSprite2D = $Fireblast/fireblast_anim
+
+
+
 
 # ---------------- MOVE ----------------
 const SPEED: float = 250.0
@@ -70,6 +76,10 @@ const FACING_SMOOTH: float = 18.0
 var was_on_floor: bool = false
 
 func _ready() -> void:
+	fireblast_area.monitoring = false
+	fireblast_shape.disabled = true
+	fireblast_area.visible = false
+	
 	was_on_floor = is_on_floor()
 
 	health = max_health
@@ -115,6 +125,10 @@ func _physics_process(delta: float) -> void:
 			# Manual exit
 			GlobalVar.is_magma = false
 			magma_cooldown = MAGMA_COOLDOWN_TIME
+	
+	# Fireblast Input
+	if Input.is_action_just_pressed("fireblast") and GlobalVar.is_magma:
+		_perform_fireblast()
 
 	_update_dash_timers(delta)
 	_update_attack_timers(delta)
@@ -176,6 +190,24 @@ func _on_transform_finished() -> void:
 		is_transitioning = false
 		GlobalVar.is_magma = true
 		magma_timer = MAGMA_DURATION
+
+func _perform_fireblast() -> void:
+	# Optional: If your Fireblast has its own AnimatedSprite2D child:
+	fireblast_anim.play("FireBlast")
+
+	fireblast_area.visible = true
+	fireblast_area.monitoring = true
+	fireblast_shape.disabled = false
+
+	# Position it based on facing
+	fireblast_area.position.x = absf(fireblast_area.position.x) * float(facing)
+
+	# Wait 0.3 seconds then turn it off
+	get_tree().create_timer(0.3).timeout.connect(func():
+		fireblast_area.monitoring = false
+		fireblast_shape.disabled = true
+		fireblast_area.visible = false
+	)
 
 # ---------------- DAMAGE / DEATH ----------------
 func take_damage(amount: int) -> void:
