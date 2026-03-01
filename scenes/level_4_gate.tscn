@@ -229,9 +229,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_or4d4"]
-size = Vector2(18.875, 26.25)
+size = Vector2(25.875, 35.25)
 
 [node name="Gate_White" type="Area2D" unique_id=1508022327]
+collision_mask = 2
 script = ExtResource("1_ykyth")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1663715383]

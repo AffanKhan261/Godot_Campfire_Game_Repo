@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bojihq8j0o5qd"]
 
 [ext_resource type="FontFile" uid="uid://bbfm0q7fajwvn" path="res://assets/PressStart2P-Regular.ttf" id="1_5p55f"]
-[ext_resource type="Script" uid="uid://ck20yxarw3yrs" path="res://scripts/control.gd" id="1_r67kn"]
+[ext_resource type="Script" path="res://scripts/control.gd" id="1_r67kn"]
 
 [node name="Control" type="Control" unique_id=416858489]
 layout_mode = 3
@@ -69,7 +69,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_5p55f")
 theme_override_font_sizes/font_size = 30
-text = "Music by Marcus Lee"
+text = "Code By Affan Khan"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -78,7 +78,21 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_5p55f")
 theme_override_font_sizes/font_size = 30
-text = "Code By Affan Khan"
+text = "Music Credits:
+
+Main Menu:
+ULTRAKILL - The Fire is Gone
+
+Level 1:
+Rivals of Aether - Anomalous
+
+Level 2:
+ULTRAKILL - A Heart of Cold
+ULTRAKILL - Panic Betrayer
+
+Ending:
+Rivals of Aether - Sorrow
+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -87,6 +101,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_5p55f")
 theme_override_font_sizes/font_size = 30
-text = "Thank You So Much!"
+text = "And, Thank YOU for playing!"
 horizontal_alignment = 1
 vertical_alignment = 1
