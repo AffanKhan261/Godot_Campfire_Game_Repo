@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c1l24u75dq8tk" path="res://scripts/miner_player.gd" id="1_iyavu"]
 [ext_resource type="Texture2D" uid="uid://hrs1soljsuru" path="res://assets/sprites/Player/Miner character idle.png" id="1_sldkq"]
 [ext_resource type="Texture2D" uid="uid://cy1is216nxvbc" path="res://assets/sprites/Player/Miner character 1.png" id="3_3pmy6"]
+[ext_resource type="Texture2D" uid="uid://djrqtbwcw73g" path="res://assets/sprites/Player/fire blast magma character.png" id="3_07w7j"]
 [ext_resource type="Texture2D" uid="uid://bguvv1ohsel6s" path="res://assets/sprites/Player/Miner character jump.png" id="3_ieu5k"]
 [ext_resource type="Texture2D" uid="uid://eriujl1frf8s" path="res://assets/sprites/Player/Miner character damage.png" id="3_xrcab"]
 [ext_resource type="Texture2D" uid="uid://clc3v1iipo2oe" path="res://assets/sprites/Player/Miner character attack.png" id="4_f038o"]
@@ -36,6 +37,10 @@ region = Rect2(128, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_d4vlq"]
 atlas = ExtResource("4_f038o")
 region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffs62"]
+atlas = ExtResource("3_07w7j")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_24386"]
 atlas = ExtResource("3_xrcab")
@@ -261,6 +266,14 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffs62")
+}],
+"loop": true,
+"name": &"blast_position",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -672,9 +685,8 @@ script = ExtResource("1_iyavu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1800577890]
 sprite_frames = SubResource("SpriteFrames_agh33")
-animation = &"transform"
-frame = 14
-frame_progress = 1.0
+animation = &"blast_position"
+frame_progress = 0.05787324
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=621166794]
 visible = false
@@ -690,7 +702,7 @@ collision_mask = 4
 position = Vector2(12, 1)
 shape = SubResource("RectangleShape2D_ieu5k")
 
-[node name="Fireblast" type="Area2D" parent="." unique_id=90404167]
+[node name="Fireblast" type="Area2D" parent="." unique_id=90404167 groups=["player_attack"]]
 position = Vector2(23, -7)
 
 [node name="fireblast_anim" type="AnimatedSprite2D" parent="Fireblast" unique_id=1190881138]

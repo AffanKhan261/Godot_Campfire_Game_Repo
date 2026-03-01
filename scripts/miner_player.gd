@@ -80,6 +80,8 @@ func _ready() -> void:
 	fireblast_shape.disabled = true
 	fireblast_area.visible = false
 	
+	fireblast_area.add_to_group("player_attack")
+	
 	was_on_floor = is_on_floor()
 
 	health = max_health
@@ -128,6 +130,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Fireblast Input
 	if Input.is_action_just_pressed("fireblast") and GlobalVar.is_magma:
+		animated_sprite.play("blast_position")
 		_perform_fireblast()
 
 	_update_dash_timers(delta)

@@ -246,12 +246,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_schcc"]
-radius = 20.0
-height = 92.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y2kyn"]
 radius = 29.0
+height = 92.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_schcc"]
+radius = 20.0
 height = 92.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ijwo"]
@@ -271,17 +271,18 @@ scale = Vector2(3.5390625, 3.5390625)
 sprite_frames = SubResource("SpriteFrames_mkyw6")
 animation = &"axe_attack"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=857063392]
-position = Vector2(-9, 7)
-shape = SubResource("CapsuleShape2D_schcc")
-
-[node name="HurtBox" type="Area2D" parent="." unique_id=103136510]
+[node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=103136510]
+scale = Vector2(0.2825607, 0.2825607)
 collision_layer = 4
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1890901481]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/HurtBox" unique_id=1890901481]
 position = Vector2(-9, 7)
 shape = SubResource("CapsuleShape2D_y2kyn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=857063392]
+position = Vector2(-9, 7)
+shape = SubResource("CapsuleShape2D_schcc")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1703524848]
 process_mode = 4
@@ -316,7 +317,7 @@ collision_mask = 2
 position = Vector2(-1, 3)
 shape = SubResource("CircleShape2D_0ijwo")
 
-[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="area_entered" from="AnimatedSprite2D/HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
