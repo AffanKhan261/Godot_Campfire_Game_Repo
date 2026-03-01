@@ -51,6 +51,11 @@ var _invuln_timer: float = 0.0
 
 var is_dead: bool = false
 
+# ---------------- TRANSFORMATION ----------------
+var is_magma: bool = false
+
+
+
 # ---------------- FACING (smooth) ----------------
 var facing: int = 1
 var facing_blend: float = 1.0
@@ -77,6 +82,12 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 
+	# Magma Transformation input
+	if Input.is_action_just_pressed("magma_player"):
+		print("Magma mode")
+		is_magma = !is_magma # This flips the true/false state
+
+
 	_update_dash_timers(delta)
 	_update_attack_timers(delta)
 	_update_invuln(delta)
@@ -88,6 +99,7 @@ func _physics_process(delta: float) -> void:
 	# Dash input
 	if Input.is_action_just_pressed("speed_dash"):
 		_try_start_dash()
+
 
 	# Gravity (disabled during dash)
 	if not is_on_floor() and not is_dashing:
@@ -304,6 +316,14 @@ func _update_animations() -> void:
 
 	if GlobalVar.HEALTH > 0:
 		if GlobalVar.damage_anim_enabler == false:
+			
+			if is_magma:
+				if absf(velocity.x) > 10.0: # Using 10.0 to avoid jitter
+					animated_sprite.play("tranform_jump")
+				else:
+					animated_sprite.play("tranform_idle")
+				return # THIS STOP THE REST OF THE FUNCTION FROM RUNNING			
+			
 			# Don't override the attack animation while attacking
 			if is_attacking:
 				return
@@ -337,6 +357,7 @@ func _update_animations() -> void:
 			animated_sprite.play("damage")
 	else:
 		animated_sprite.play("death")
+		is_dead = true
 		await get_tree().create_timer(1.575).timeout
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 

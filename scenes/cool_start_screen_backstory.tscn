@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cr3m7c22c031x"]
 
 [ext_resource type="Texture2D" uid="uid://cpvetjvoss1bq" path="res://assets/Cave Assets/background1.png" id="1_c0adj"]
+[ext_resource type="Script" uid="uid://c46qugalt37eu" path="res://scripts/cool_start_screen_backstory.gd" id="1_s8em3"]
 [ext_resource type="Texture2D" uid="uid://dfeos7o1w700p" path="res://assets/Cave Assets/background2.png" id="2_cft5a"]
 [ext_resource type="Texture2D" uid="uid://ddx5uinsgowee" path="res://assets/Cave Assets/background3.png" id="3_o0hol"]
 [ext_resource type="Texture2D" uid="uid://d1poi7w50kph" path="res://assets/Cave Assets/background4a.png" id="4_u3fla"]
@@ -11,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c36k1aoitnyaq" path="res://scenes/miner_player.tscn" id="9_cft5a"]
 [ext_resource type="PackedScene" uid="uid://dblkyb7ra0gx3" path="res://scenes/portal.tscn" id="10_o0hol"]
 [ext_resource type="FontFile" uid="uid://bbfm0q7fajwvn" path="res://assets/PressStart2P-Regular.ttf" id="11_u3fla"]
+[ext_resource type="PackedScene" uid="uid://dg7iuundx53kx" path="res://scenes/player.tscn" id="13_s8em3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fp76t"]
 texture = ExtResource("1_c0adj")
@@ -12750,6 +12752,7 @@ sources/6 = SubResource("TileSetAtlasSource_c6ep7")
 sources/7 = SubResource("TileSetAtlasSource_84p6v")
 
 [node name="Cool Start Screen_Backstory" type="Node2D" unique_id=1817839977]
+script = ExtResource("1_s8em3")
 
 [node name="Area2D" parent="." unique_id=1274226111 instance=ExtResource("10_o0hol")]
 position = Vector2(-181, 320)
@@ -12779,3 +12782,6 @@ theme_override_fonts/font = ExtResource("11_u3fla")
 theme_override_font_sizes/font_size = 13
 text = "Enter the portal 
 to  the underground"
+
+[node name="Player_Cave_Hunter" parent="." unique_id=1189760568 instance=ExtResource("13_s8em3")]
+position = Vector2(-1141, -148)
