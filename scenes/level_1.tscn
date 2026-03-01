@@ -12,12 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://ckmrsut2mgy5w" path="res://assets/sprites/World/Pebbles.png" id="7_2cbcq"]
 [ext_resource type="Texture2D" uid="uid://b1wu4g15udkka" path="res://assets/sprites/World/Mushrooms.png" id="8_isj1j"]
 [ext_resource type="PackedScene" uid="uid://d3t5ipx4ydmdr" path="res://scenes/lava.tscn" id="9_e3sih"]
-[ext_resource type="PackedScene" path="res://scenes/sign.tscn" id="10_2os1m"]
+[ext_resource type="PackedScene" uid="uid://bsqnix3b1y21s" path="res://scenes/sign.tscn" id="10_2os1m"]
 [ext_resource type="PackedScene" uid="uid://dl5vm7svnl5eb" path="res://scenes/magma.tscn" id="10_2y5yt"]
-[ext_resource type="Script" path="res://scripts/sign_1.gd" id="11_7gny6"]
+[ext_resource type="Script" uid="uid://h4w4xvvnguso" path="res://scripts/sign_1.gd" id="11_7gny6"]
 [ext_resource type="FontFile" uid="uid://bbfm0q7fajwvn" path="res://assets/PressStart2P-Regular.ttf" id="12_go7sj"]
-[ext_resource type="Script" path="res://scripts/sign_2.gd" id="13_2aecg"]
-[ext_resource type="PackedScene" path="res://scenes/level_1_gate.tscn" id="15_6dial"]
+[ext_resource type="Script" uid="uid://daqags5ed1efd" path="res://scripts/sign_2.gd" id="13_2aecg"]
+[ext_resource type="PackedScene" uid="uid://dytqc7d73rrb6" path="res://scenes/level_1_gate.tscn" id="15_6dial"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_014kd"]
 texture = ExtResource("1_014kd")
@@ -190,7 +190,7 @@ Open the gate."
 horizontal_alignment = 1
 
 [node name="Sign2" parent="Light Orbs" unique_id=178701518 instance=ExtResource("10_2os1m")]
-position = Vector2(-138, -296)
+position = Vector2(992, 112)
 script = ExtResource("13_2aecg")
 
 [node name="Label" type="Label" parent="Light Orbs/Sign2" unique_id=2048439995]
@@ -201,8 +201,7 @@ offset_right = 101.0
 offset_bottom = -22.0
 theme_override_fonts/font = ExtResource("12_go7sj")
 theme_override_font_sizes/font_size = 8
-text = "Collect the 6 light orbs,
-Open the gate."
+text = "secret secret :D"
 horizontal_alignment = 1
 
 [node name="Lava" type="Node" parent="." unique_id=1230309012]
@@ -230,3 +229,5 @@ collision_mask = 2
 [connection signal="body_entered" from="Light Orbs/Sign" to="Light Orbs/Sign2" method="_on_sign_body_entered"]
 [connection signal="body_exited" from="Light Orbs/Sign" to="Light Orbs/Sign" method="_on_body_exited"]
 [connection signal="body_exited" from="Light Orbs/Sign" to="Light Orbs/Sign2" method="_on_sign_body_exited"]
+[connection signal="body_entered" from="Light Orbs/Sign2" to="Light Orbs/Sign2" method="_on_body_entered"]
+[connection signal="body_exited" from="Light Orbs/Sign2" to="Light Orbs/Sign2" method="_on_body_exited"]
