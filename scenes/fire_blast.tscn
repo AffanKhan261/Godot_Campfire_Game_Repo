@@ -196,96 +196,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"FireBlast",
-"speed": 15.0
+"speed": 30.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t72oq"]
 resource_local_to_scene = true
-size = Vector2(0, 6)
-
-[sub_resource type="Animation" id="Animation_xlssx"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:shape:size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 6)]
-}
-
-[sub_resource type="Animation" id="Animation_444pv"]
-resource_name = "fireblast"
-length = 2.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [26]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:shape:size")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 0.26),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 6), Vector2(32, 15)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kvlk"]
-_data = {
-&"RESET": SubResource("Animation_xlssx"),
-&"fireblast": SubResource("Animation_444pv")
-}
+size = Vector2(32, 10)
 
 [node name="FireBlast" type="Area2D" unique_id=2052468658]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1226039449]
 sprite_frames = SubResource("SpriteFrames_c2yxj")
 animation = &"FireBlast"
+frame = 23
+frame_progress = 0.01254632
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=243273870]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_t72oq")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=880410033]
-libraries/ = SubResource("AnimationLibrary_2kvlk")

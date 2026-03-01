@@ -470,7 +470,9 @@ script = ExtResource("1_iyavu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1800577890]
 sprite_frames = SubResource("SpriteFrames_agh33")
-animation = &"tranform_walk"
+animation = &"transform"
+frame = 14
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=621166794]
 visible = false
