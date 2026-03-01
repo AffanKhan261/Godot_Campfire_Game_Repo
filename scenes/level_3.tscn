@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bkhbr7f24g1ax"]
+[gd_scene format=3 uid="uid://deg1j7gmwskt2"]
 
 [ext_resource type="Texture2D" uid="uid://bqqf6dxdg7cqj" path="res://assets/caverns-files-web/Caverns-preview.jpg" id="1_3bmlt"]
 [ext_resource type="AudioStream" uid="uid://nrslr5mn0imq" path="res://assets/audio_music (remember to credit)/[Chapter 2]Dead Cells - The Crypt.mp3" id="1_70nk6"]
@@ -1192,7 +1192,6 @@ zoom = Vector2(2.5, 2.5)
 [node name="Fire Golem" parent="." unique_id=1031691470 instance=ExtResource("4_eqxsl")]
 position = Vector2(169, -66)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1000853997]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=807904764]
 stream = ExtResource("1_70nk6")
 autoplay = true
-max_distance = 4096.0
