@@ -233,6 +233,18 @@ position = Vector2(272, 16)
 position = Vector2(1757, -940)
 collision_mask = 2
 
+[node name="Label" type="Label" parent="." unique_id=1879652875]
+offset_left = -683.0
+offset_top = -222.0
+offset_right = -299.0
+offset_bottom = -45.0
+theme_override_fonts/font = ExtResource("12_go7sj")
+theme_override_font_sizes/font_size = 11
+text = "Press Q key for magma mode
+When in magma mode, press
+R key for fireblast.
+Otherwise press F key for attack"
+
 [connection signal="body_entered" from="Light Orbs/Sign" to="Light Orbs/Sign" method="_on_body_entered"]
 [connection signal="body_entered" from="Light Orbs/Sign" to="Light Orbs/Sign2" method="_on_sign_body_entered"]
 [connection signal="body_exited" from="Light Orbs/Sign" to="Light Orbs/Sign" method="_on_body_exited"]
