@@ -9,10 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://dl5vm7svnl5eb" path="res://scenes/magma.tscn" id="5_b4j7a"]
 [ext_resource type="PackedScene" uid="uid://d3t5ipx4ydmdr" path="res://scenes/lava.tscn" id="5_y0kc7"]
 [ext_resource type="PackedScene" uid="uid://cy2tcpqjfkium" path="res://scenes/full_lava.tscn" id="6_wo48x"]
-[ext_resource type="Script" path="res://scripts/switch_music.gd" id="9_6cvei"]
+[ext_resource type="Script" uid="uid://0nghcjr7qhwp" path="res://scripts/switch_music.gd" id="9_6cvei"]
 [ext_resource type="PackedScene" uid="uid://cwxf4mu2iuu5d" path="res://scenes/enemy.tscn" id="11_172wr"]
 [ext_resource type="PackedScene" uid="uid://ghb1womsdudd" path="res://scenes/fire_orb.tscn" id="12_g2hoc"]
 [ext_resource type="PackedScene" uid="uid://buyjk6xnek15g" path="res://scenes/level_2_gate.tscn" id="13_g2hoc"]
+[ext_resource type="PackedScene" uid="uid://bsqnix3b1y21s" path="res://scenes/sign.tscn" id="14_guvtl"]
+[ext_resource type="FontFile" uid="uid://bbfm0q7fajwvn" path="res://assets/PressStart2P-Regular.ttf" id="15_igmy8"]
+[ext_resource type="Script" uid="uid://bbi6yegnjqgug" path="res://scripts/other_sign.gd" id="15_wdtqu"]
 
 [sub_resource type="GDScript" id="GDScript_wo48x"]
 script/source = "extends Node2D
@@ -691,4 +694,22 @@ position = Vector2(3600, 528)
 [node name="Gate_Red" parent="." unique_id=1508022327 instance=ExtResource("13_g2hoc")]
 position = Vector2(4714, 1236)
 
+[node name="Sign" parent="." unique_id=1625671768 instance=ExtResource("14_guvtl")]
+position = Vector2(151, -48)
+script = ExtResource("15_wdtqu")
+
+[node name="Label" type="Label" parent="Sign" unique_id=769194024]
+visible = false
+offset_left = -80.0
+offset_top = -74.0
+offset_right = 80.0
+offset_bottom = -25.0
+theme_override_fonts/font = ExtResource("15_igmy8")
+theme_override_font_sizes/font_size = 8
+text = "Collect 10 red orbs,
+Open the new gate."
+horizontal_alignment = 1
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_entered" from="Sign" to="Sign" method="_on_body_entered"]
+[connection signal="body_exited" from="Sign" to="Sign" method="_on_body_exited"]
