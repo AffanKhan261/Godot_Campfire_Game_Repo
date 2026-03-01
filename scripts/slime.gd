@@ -1,6 +1,6 @@
 extends Node2D
 
-const slime_speed = 60
+const slime_speed = 150
 
 var slime_direction = 1
 
