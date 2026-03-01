@@ -103,6 +103,7 @@ zoom = Vector2(2.5, 2.5)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1307639341]
 stream = ExtResource("4_5xbjy")
 autoplay = true
+max_distance = 4096.0
 
 [node name="Magma" parent="." unique_id=806916145 instance=ExtResource("10_2y5yt")]
 position = Vector2(48, 16)
