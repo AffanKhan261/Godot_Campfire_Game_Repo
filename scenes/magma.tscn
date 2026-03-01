@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dl5vm7svnl5eb"]
 
 [ext_resource type="Texture2D" uid="uid://d4e6o0xn7lvgi" path="res://assets/sprites/World/magma.png" id="1_88ox0"]
-[ext_resource type="Script" path="res://scripts/magma.gd" id="1_g1gu6"]
+[ext_resource type="Script" uid="uid://c683l2lrb3bmd" path="res://scripts/magma.gd" id="1_g1gu6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g1gu6"]
 atlas = ExtResource("1_88ox0")
