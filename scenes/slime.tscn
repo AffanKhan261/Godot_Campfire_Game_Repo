@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://ddykvjo65kiji"]
+
+[ext_resource type="Script" uid="uid://jdn3ohqs22tf" path="res://scripts/slime.gd" id="1_n6pvg"]
+[ext_resource type="Texture2D" uid="uid://ck2rsqaf3pbjp" path="res://assets/sprites/Enemies/magma slime.png" id="2_pjw23"]
+[ext_resource type="Script" uid="uid://dc2bp78hlsuks" path="res://scripts/slime_damage.gd" id="3_2npkn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd6lc"]
+atlas = ExtResource("2_pjw23")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gstla"]
+atlas = ExtResource("2_pjw23")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v5wyi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd6lc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gstla")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0l8pv"]
+radius = 7.0
+height = 22.0
+
+[node name="Slime" type="Node2D" unique_id=1459619560]
+script = ExtResource("1_n6pvg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=541194474]
+sprite_frames = SubResource("SpriteFrames_v5wyi")
+autoplay = "default"
+frame = 1
+frame_progress = 0.71770763
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=909097854]
+collision_mask = 2
+script = ExtResource("3_2npkn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1532837854]
+position = Vector2(0, 8)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_0l8pv")
+
+[node name="Left" type="RayCast2D" parent="." unique_id=593071525]
+target_position = Vector2(0, -10)
+
+[node name="Right" type="RayCast2D" parent="." unique_id=2098629675]
+target_position = Vector2(0, 10)
+
+[connection signal="body_entered" from="DamageArea" to="DamageArea" method="_on_body_entered"]

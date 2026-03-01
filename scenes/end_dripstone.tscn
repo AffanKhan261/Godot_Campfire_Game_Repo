@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cycmshy4bo5va"]
+
+[ext_resource type="Texture2D" uid="uid://dit7tq17ty3sj" path="res://assets/sprites/World/Stalagmite.png" id="1_3dlw2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyuk4"]
+atlas = ExtResource("1_3dlw2")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cn7rf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyuk4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ending" type="Area2D" unique_id=1032699436]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=207468357]
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_cn7rf")
