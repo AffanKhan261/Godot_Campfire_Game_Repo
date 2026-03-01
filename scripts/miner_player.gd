@@ -222,55 +222,38 @@ func _perform_fireblast() -> void:
 
 # ---------------- DAMAGE / DEATH ----------------
 func take_damage(amount: int) -> void:
-	# 1. Check if the player is dead
-	if is_dead:
+	# Block damage if already dead or in Magma mode
+	if is_dead or GlobalVar.is_magma or is_transitioning:
 		return
-	
-	# 2. Check if the player is in Magma Mode or currently Transforming
-	if GlobalVar.is_magma == true or is_transitioning == true:
-		print("SKIBIDI OHIO")
-		return # This stops the rest of the function from running!
-		
-	# 3. Check for standard invulnerability frames
+
 	if _invuln_timer > 0.0:
 		return
 
-	# 4. If none of the above are true, actually take damage
-	health = max(health - amount, 0)
-	_invuln_timer = invulnerable_time
-
-	if health <= 0:
-		_die()
-
-
-
-	# Optional: small knockback feel (tweak/remove if you want)
-	# velocity.x = -float(facing) * 120.0
-
-
-
-	# If you have a hurt animation, you can play it here safely:
-	# if animated_sprite.sprite_frames.has_animation("hurt"):
-	# 	animated_sprite.play("hurt")
+	# One-hit kill logic
+	GlobalVar.HEALTH = 0
+	_die()
 
 func _die() -> void:
-	is_dead = true
-	is_attacking = false
-	is_dashing = false
-
-	# Turn off the attack hitbox so you can't damage while dead
-	attack_area.monitoring = false
-	attack_shape.disabled = true
-
-	# Stop movement
+	if is_dead: 
+		return 
+	
+	is_dead = true # Set this first to block _update_animations
+	
+	# Stop all movement and physics processing
 	velocity = Vector2.ZERO
-
-	# Play death animation if present
+	set_physics_process(false) 
+	
+	# Play the death animation exactly ONCE here
+	animated_sprite.play("death")
+	
+	# Ensure the animation doesn't loop in the editor (See Step 4)
 	if animated_sprite.sprite_frames.has_animation("death"):
-		animated_sprite.play("death")
+		await animated_sprite.animation_finished
 	else:
-		# fallback
-		animated_sprite.play("idle")
+		await get_tree().create_timer(1.0).timeout
+		
+	# Reload the level
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _update_invuln(delta: float) -> void:
 	if _invuln_timer > 0.0:
@@ -408,8 +391,10 @@ func _update_facing_and_flip(delta: float) -> void:
 
 # ---------------- ANIMATIONS ----------------
 func _update_animations() -> void:
-
-
+	# 1. If we are dead, check if we are already playing the death animation
+	# 1. If dead, EXIT IMMEDIATELY and do nothing else
+	if is_dead:
+		return
 
 	if GlobalVar.HEALTH > 0:
 		if GlobalVar.damage_anim_enabler == false:
@@ -464,7 +449,7 @@ func _update_animations() -> void:
 		is_dead = true
 		await get_tree().create_timer(1.575).timeout
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
-
+		
 func get_facing() -> int:
 	return facing
 

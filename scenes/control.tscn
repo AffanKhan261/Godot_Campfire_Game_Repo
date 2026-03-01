@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://bojihq8j0o5qd"]
+
+[ext_resource type="FontFile" uid="uid://bbfm0q7fajwvn" path="res://assets/PressStart2P-Regular.ttf" id="1_5p55f"]
+[ext_resource type="Script" uid="uid://ck20yxarw3yrs" path="res://scripts/control.gd" id="1_r67kn"]
+
+[node name="Control" type="Control" unique_id=416858489]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 547.0
+offset_bottom = 327.0
+script = ExtResource("1_r67kn")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=873689657]
+layout_mode = 1
+offset_right = 1152.0
+offset_bottom = 1280.0
+color = Color(0, 0, 0, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1588013915]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -255.5
+offset_top = -1.5
+offset_right = 863.0
+offset_bottom = 585.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=2003268341]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 75
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=631961579]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_5p55f")
+theme_override_font_sizes/font_size = 30
+text = "A Game made for Campfire Brisbane 2026"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=169522622]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_5p55f")
+theme_override_font_sizes/font_size = 27
+text = "Developed by Affan, Marcus, and Charles"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1423430472]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_5p55f")
+theme_override_font_sizes/font_size = 30
+text = "Art by Charles Manianchara"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1681235220]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_5p55f")
+theme_override_font_sizes/font_size = 30
+text = "Music by Marcus Lee"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=950326065]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_5p55f")
+theme_override_font_sizes/font_size = 30
+text = "Code By Affan Khan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=134883884]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_5p55f")
+theme_override_font_sizes/font_size = 30
+text = "Thank You So Much!"
+horizontal_alignment = 1
+vertical_alignment = 1
