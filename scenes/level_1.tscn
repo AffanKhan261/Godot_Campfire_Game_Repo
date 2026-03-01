@@ -12,14 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://ckmrsut2mgy5w" path="res://assets/sprites/World/Pebbles.png" id="7_2cbcq"]
 [ext_resource type="Texture2D" uid="uid://b1wu4g15udkka" path="res://assets/sprites/World/Mushrooms.png" id="8_isj1j"]
 [ext_resource type="PackedScene" uid="uid://d3t5ipx4ydmdr" path="res://scenes/lava.tscn" id="9_e3sih"]
-[ext_resource type="PackedScene" path="res://scenes/sign.tscn" id="10_2os1m"]
+[ext_resource type="PackedScene" uid="uid://bsqnix3b1y21s" path="res://scenes/sign.tscn" id="10_2os1m"]
 [ext_resource type="PackedScene" uid="uid://dl5vm7svnl5eb" path="res://scenes/magma.tscn" id="10_2y5yt"]
-[ext_resource type="Script" path="res://scripts/sign_1.gd" id="11_7gny6"]
+[ext_resource type="Script" uid="uid://h4w4xvvnguso" path="res://scripts/sign_1.gd" id="11_7gny6"]
 [ext_resource type="FontFile" uid="uid://bbfm0q7fajwvn" path="res://assets/PressStart2P-Regular.ttf" id="12_go7sj"]
 [ext_resource type="Script" uid="uid://daqags5ed1efd" path="res://scripts/sign_2.gd" id="13_2aecg"]
-[ext_resource type="PackedScene" path="res://scenes/level_1_gate.tscn" id="15_6dial"]
+[ext_resource type="PackedScene" uid="uid://dytqc7d73rrb6" path="res://scenes/level_1_gate.tscn" id="15_6dial"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_014kd"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x2xxo"]
 texture = ExtResource("1_014kd")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -31,12 +31,12 @@ texture_region_size = Vector2i(32, 32)
 3:0/0 = 0
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5xbjy"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2cbcq"]
 texture = ExtResource("2_rus8k")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2y5yt"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_isj1j"]
 texture = ExtResource("3_pa8r4")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -48,7 +48,7 @@ texture_region_size = Vector2i(32, 32)
 3:0/0 = 0
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, 3.8554344, 16, 2.4534569, 16, -16, -7.3603706)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_15mv3"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_so66j"]
 texture = ExtResource("3_fcfvj")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -64,7 +64,7 @@ texture_region_size = Vector2i(32, 32)
 10:0/0 = 0
 11:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e3sih"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tr1x6"]
 texture = ExtResource("4_pa8r4")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -76,7 +76,7 @@ texture_region_size = Vector2i(32, 32)
 3:0/0 = 0
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.9069138, -16, 16, -16, 16, 16, -16, 16, -16, 2.628704)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_so66j"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d5akn"]
 texture = ExtResource("6_x2xxo")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -85,7 +85,7 @@ texture_region_size = Vector2i(32, 32)
 3:0/0 = 0
 4:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tr1x6"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbtxt"]
 texture = ExtResource("7_2cbcq")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -103,7 +103,7 @@ texture_region_size = Vector2i(32, 32)
 12:0/0 = 0
 13:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d5akn"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x2fux"]
 texture = ExtResource("8_isj1j")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -118,14 +118,14 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_bswci"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_014kd")
-sources/1 = SubResource("TileSetAtlasSource_5xbjy")
-sources/3 = SubResource("TileSetAtlasSource_15mv3")
-sources/4 = SubResource("TileSetAtlasSource_e3sih")
-sources/2 = SubResource("TileSetAtlasSource_2y5yt")
-sources/5 = SubResource("TileSetAtlasSource_so66j")
-sources/6 = SubResource("TileSetAtlasSource_tr1x6")
-sources/7 = SubResource("TileSetAtlasSource_d5akn")
+sources/0 = SubResource("TileSetAtlasSource_x2xxo")
+sources/1 = SubResource("TileSetAtlasSource_2cbcq")
+sources/3 = SubResource("TileSetAtlasSource_so66j")
+sources/4 = SubResource("TileSetAtlasSource_tr1x6")
+sources/2 = SubResource("TileSetAtlasSource_isj1j")
+sources/5 = SubResource("TileSetAtlasSource_d5akn")
+sources/6 = SubResource("TileSetAtlasSource_wbtxt")
+sources/7 = SubResource("TileSetAtlasSource_x2fux")
 
 [node name="level1" type="Node2D" unique_id=1894671635]
 
@@ -145,10 +145,9 @@ collision_mask = 1
 [node name="Camera2D" type="Camera2D" parent="MinerPlayer" unique_id=859660151]
 zoom = Vector2(2.5, 2.5)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1307639341]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=936319114]
 stream = ExtResource("4_5xbjy")
 autoplay = true
-max_distance = 4096.0
 
 [node name="Magma" parent="." unique_id=806916145 instance=ExtResource("10_2y5yt")]
 position = Vector2(48, 16)
