@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://ciw2oawelfad1" path="res://assets/audio_music (remember to credit)/[Chapter 1]ULTRAKILL - A Heart of Cold.mp3" id="1_3bmlt"]
 [ext_resource type="Texture2D" uid="uid://dij3ylhavruse" path="res://assets/sprites/World/magma rocks all types.png" id="3_eqxsl"]
 [ext_resource type="PackedScene" uid="uid://c36k1aoitnyaq" path="res://scenes/miner_player.tscn" id="3_pbc48"]
-[ext_resource type="PackedScene" uid="uid://kxgma181cs52" path="res://scenes/lavagroupinlevel2.tscn" id="4_b4j7a"]
+[ext_resource type="PackedScene" path="res://scenes/lavagroupinlevel2.tscn" id="4_b4j7a"]
 [ext_resource type="PackedScene" uid="uid://dl5vm7svnl5eb" path="res://scenes/magma.tscn" id="5_b4j7a"]
 [ext_resource type="PackedScene" path="res://scenes/full_lava.tscn" id="6_wo48x"]
 
@@ -13,7 +13,7 @@ script/source = "extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if input.is_action_pressed(\"exit\"):
+	if Input.is_action_pressed(\"exit\"):
 		get_tree()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
