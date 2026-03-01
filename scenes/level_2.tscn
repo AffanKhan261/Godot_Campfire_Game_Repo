@@ -97,7 +97,7 @@ debug_color = Color(0.5113366, 0.511543, 0.72149897, 0.41960785)
 position = Vector2(0, -22)
 
 [node name="Camera2D" type="Camera2D" parent="MinerPlayer" unique_id=2088637570]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(1.5, 1.5)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1056908251]
 tile_set = SubResource("TileSet_wo48x")
