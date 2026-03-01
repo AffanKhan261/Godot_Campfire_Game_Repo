@@ -52,10 +52,10 @@ var _invuln_timer: float = 0.0
 var is_dead: bool = false
 
 # ---------------- TRANSFORMATION ----------------
-var is_magma: bool = false
 var is_transitioning: bool = false # New: Tracks the "transform" animation
 var magma_timer: float = 0.0
 var magma_cooldown: float = 0.0
+
 
 const MAGMA_DURATION: float = 10.0
 const MAGMA_COOLDOWN_TIME: float = 10.0
@@ -91,24 +91,29 @@ func _physics_process(delta: float) -> void:
 	if magma_cooldown > 0:
 		magma_cooldown -= delta
 	
-	if is_magma and not is_transitioning:
+	if GlobalVar.is_magma or is_transitioning:
+	# If something else lowered our health, force it back up
+		if GlobalVar.HEALTH < max_health: 
+			GlobalVar.HEALTH = max_health
+	
+	if GlobalVar.is_magma and not is_transitioning:
 		magma_timer -= delta
 		if magma_timer <= 0:
-			is_magma = false
+			GlobalVar.is_magma = false
 			magma_cooldown = MAGMA_COOLDOWN_TIME
 
 	# Magma Input Logic
 	if Input.is_action_just_pressed("magma_player"):
-		if not is_magma and not is_transitioning and magma_cooldown <= 0:
+		if not GlobalVar.is_magma and not is_transitioning and magma_cooldown <= 0:
 			is_transitioning = true
 			animated_sprite.play("transform") # 'transform' with an S
 			
 			if not animated_sprite.animation_finished.is_connected(_on_tranform_done):
 				animated_sprite.animation_finished.connect(_on_tranform_done, CONNECT_ONE_SHOT)
 		
-		elif is_magma:
+		elif GlobalVar.is_magma:
 			# Manual exit
-			is_magma = false
+			GlobalVar.is_magma = false
 			magma_cooldown = MAGMA_COOLDOWN_TIME
 
 	_update_dash_timers(delta)
@@ -169,7 +174,7 @@ func _start_transformation_sequence() -> void:
 func _on_transform_finished() -> void:
 	if is_transitioning:
 		is_transitioning = false
-		is_magma = true
+		GlobalVar.is_magma = true
 		magma_timer = MAGMA_DURATION
 
 # ---------------- DAMAGE / DEATH ----------------
@@ -179,7 +184,7 @@ func take_damage(amount: int) -> void:
 		return
 	
 	# 2. Check if the player is in Magma Mode or currently Transforming
-	if is_magma == true or is_transitioning == true:
+	if GlobalVar.is_magma == true or is_transitioning == true:
 		print("SKIBIDI OHIO")
 		return # This stops the rest of the function from running!
 		
@@ -371,7 +376,7 @@ func _update_animations() -> void:
 				return # Let the 'transform' animation play uninterrupted
 
 			# 2. PRIORITY: Magma Mode (Spelled 'tranform')
-			if is_magma:
+			if GlobalVar.is_magma:
 				if not is_on_floor():
 					animated_sprite.play("tranform_jump")
 				elif absf(velocity.x) > 10.0:
@@ -423,5 +428,5 @@ func get_facing() -> int:
 func _on_tranform_done() -> void:
 	if is_transitioning:
 		is_transitioning = false
-		is_magma = true
+		GlobalVar.is_magma = true
 		magma_timer = MAGMA_DURATION
