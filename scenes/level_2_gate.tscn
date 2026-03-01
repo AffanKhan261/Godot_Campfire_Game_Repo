@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://bq250wuskstei"]
+[gd_scene format=3 uid="uid://buyjk6xnek15g"]
 
-[ext_resource type="Script" uid="uid://bev86me86np0e" path="res://scripts/level_2_gate.gd" id="1_jtbdh"]
+[ext_resource type="Script" path="res://scripts/level_2_gate.gd" id="1_jtbdh"]
 [ext_resource type="Texture2D" uid="uid://lk8g1x8r85xv" path="res://assets/sprites/World/Fire gate.png" id="3_n4ydg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_35ch2"]
@@ -232,6 +232,7 @@ animations = [{
 size = Vector2(18.875, 26.25)
 
 [node name="Gate_Red" type="Area2D" unique_id=1508022327]
+collision_mask = 2
 script = ExtResource("1_jtbdh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1663715383]
