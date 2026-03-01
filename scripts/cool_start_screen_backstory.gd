@@ -1,11 +1,16 @@
 extends Node2D
 @onready var miner_player: CharacterBody2D = $MinerPlayer
 @onready var player_cave_hunter: CharacterBody2D = $Player_Cave_Hunter
+@onready var wall: StaticBody2D = $StaticBody2D
+@onready var button: Area2D = $Area2D2
 
 var active_player: CharacterBody2D
 
+
+
 func _ready():
 	# Set the initial active player
+	button.button_pressed.connect(wall.open_wall)
 	active_player = miner_player
 	_update_active_states()
 

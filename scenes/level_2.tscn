@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://kxgma181cs52" path="res://scenes/lavagroupinlevel2.tscn" id="4_b4j7a"]
 [ext_resource type="PackedScene" uid="uid://dl5vm7svnl5eb" path="res://scenes/magma.tscn" id="5_b4j7a"]
 [ext_resource type="PackedScene" uid="uid://d3t5ipx4ydmdr" path="res://scenes/lava.tscn" id="5_y0kc7"]
-[ext_resource type="PackedScene" uid="uid://cy2tcpqjfkium" path="res://scenes/full_lava.tscn" id="6_wo48x"]
+[ext_resource type="PackedScene" path="res://scenes/full_lava.tscn" id="6_wo48x"]
 
 [sub_resource type="GDScript" id="GDScript_wo48x"]
 script/source = "extends Node2D
