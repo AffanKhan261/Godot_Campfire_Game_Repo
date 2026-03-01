@@ -1,59 +1,45 @@
 extends CharacterBody2D
 
-@export var speed: float = 100.0
-@export var health: int = 50
-@export var damage_to_player: int = 15
+const SPEED = 60.0
+const GRAVITY = 980.0
 
-var direction: int = 1 # 1 for right, -1 for left
+@export var max_health: int = 50
+var health: int = 50
+var direction = 1
 
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var wall_detector: RayCast2D = $WallDetector
+# Updated names to match your Slime image (No underscores)
+@onready var ray_cast_right: RayCast2D = $RayCastRight
+@onready var ray_cast_left: RayCast2D = $RayCastLeft
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
-	# Gravity
+	# Apply Gravity
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity.y += GRAVITY * delta
 	
-	# Movement
-	velocity.x = direction * speed
+	# Wall Detection Logic
+	if direction == 1 and (ray_cast_right.is_colliding() or is_on_wall()):
+		direction = -1
+		animated_sprite.flip_h = true
+	elif direction == -1 and (ray_cast_left.is_colliding() or is_on_wall()):
+		direction = 1 # Finished this line for you
+		animated_sprite.flip_h = false
 	
-	# Wall detection / Flipping
-	if is_on_wall() or wall_detector.is_colliding():
-		_flip()
-		
+	velocity.x = direction * SPEED
 	move_and_slide()
-	sprite.play("idle") # Using idle since you mentioned that's all it has
 
-func _flip() -> void:
-	direction *= -1
-	sprite.flip_h = (direction > 0)
-	# Flip the raycast too so it looks the right way
-	wall_detector.target_position.x *= -1
-
-# --- RECEIVING DAMAGE ---
+# --- DAMAGE LOGIC ---
 func take_damage(amount: int) -> void:
 	health -= amount
 	if health <= 0:
-		queue_free() # Enemy dies
+		queue_free()
 
-# --- DAMAGING THE PLAYER ---
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	# Detect Axe or Fireblast
+	if area.is_in_group("player_attack") or area.name == "Fireblast":
+		var dmg = 100 if area.name == "Fireblast" else 25
+		take_damage(dmg)
+
 func _on_hit_box_body_entered(body: Node2D) -> void:
 	if body.has_method("take_damage"):
-		body.take_damage(damage_to_player)
-
-# --- DETECTING PLAYER ATTACKS ---
-func _on_hurt_box_area_entered(area: Area2D) -> void:
-	# Detect regular Axe attack
-	if area.is_in_group("player_attack"):
-		var dmg = 25
-		if area.get_parent().has_method("get_damage"):
-			dmg = area.get_parent().get_damage()
-		take_damage(dmg)
-	
-	# Detect Fireblast
-	if area.name == "Fireblast":
-		take_damage(100) # Superpower damage
-
-
-func _on_hit_box_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.
+		body.take_damage(15)
