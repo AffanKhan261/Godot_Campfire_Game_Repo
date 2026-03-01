@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dagem0su1vfot"]
+[gd_scene format=3 uid="uid://ghb1womsdudd"]
 
 [ext_resource type="Texture2D" uid="uid://bak82nbsqdr2b" path="res://assets/sprites/Fire orb.png" id="1_b7npf"]
 [ext_resource type="Script" uid="uid://cdd8fnd0v1p3e" path="res://scripts/fire_orb.gd" id="1_ypt65"]
@@ -43,11 +43,15 @@ animations = [{
 radius = 8.062258
 
 [node name="Fire orb" type="Area2D" unique_id=1500786318]
+collision_mask = 2
 script = ExtResource("1_ypt65")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1331239805]
 sprite_frames = SubResource("SpriteFrames_hp0t4")
+autoplay = "default"
 frame_progress = 0.60871756
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1946345911]
 shape = SubResource("CircleShape2D_ypt65")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

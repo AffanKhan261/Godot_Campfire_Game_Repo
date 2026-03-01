@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dykp1yt1sifck"]
+[gd_scene format=3 uid="uid://iibo5dbkftfm"]
 
-[ext_resource type="Script" uid="uid://ddyxw71ticiwv" path="res://scripts/level_4_gate.gd" id="1_ykyth"]
+[ext_resource type="Script" path="res://scripts/level_4_gate.gd" id="1_ykyth"]
 [ext_resource type="Texture2D" uid="uid://bkwqouxtejfr8" path="res://assets/sprites/World/White portal.png" id="2_mr6q1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ykyth"]
@@ -232,6 +232,7 @@ animations = [{
 size = Vector2(18.875, 26.25)
 
 [node name="Gate_White" type="Area2D" unique_id=1508022327]
+collision_mask = 2
 script = ExtResource("1_ykyth")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1663715383]
