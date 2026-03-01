@@ -188,6 +188,7 @@ theme_override_font_sizes/font_size = 70
 text = "Infernal Heart"
 
 [node name="Settings" type="Panel" parent="." unique_id=1877642773]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -257,7 +258,8 @@ theme_override_font_sizes/font_size = 26
 text = "Fullscreen toggle"
 script = ExtResource("4_8ln24")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1491880974]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=676510052]
+visible = false
 stream = ExtResource("4_wu84c")
 autoplay = true
 

@@ -187,24 +187,27 @@ func _play_walk() -> void:
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if state == State.DEAD:
 		return
-	if not area.is_in_group("player_attack"):
+	
+	# Check if the area is either in the attack group OR is the Fireblast
+	if not (area.is_in_group("player_attack") or area.name == "Fireblast"):
 		return
 
 	var id := area.get_instance_id()
 	var now := Time.get_ticks_msec() / 1000.0
 	var last := float(_last_hit_time_by_source.get(id, -9999.0))
+	
 	if now - last < damage_i_frame_time:
 		return
 	_last_hit_time_by_source[id] = now
 
-	var dmg := 25
-	if area.has_method("get_damage"):
+	# Determine damage amount
+	var dmg := 25 
+	if area.name == "Fireblast":
+		dmg = 100 # Give the superpower a higher damage value
+	elif area.has_method("get_damage"):
 		dmg = int(area.call("get_damage"))
-	elif "damage" in area:
-		dmg = int(area.get("damage"))
-
+	
 	_take_damage(dmg)
-
 # --- GOLEM HITBOX HITS PLAYER HERE ---
 func _on_hit_box_body_entered(body: Node2D) -> void:
 	print("HITBOX touched:", body.name)

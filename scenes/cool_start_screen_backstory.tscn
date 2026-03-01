@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dblkyb7ra0gx3" path="res://scenes/portal.tscn" id="10_o0hol"]
 [ext_resource type="FontFile" uid="uid://bbfm0q7fajwvn" path="res://assets/PressStart2P-Regular.ttf" id="11_u3fla"]
 [ext_resource type="PackedScene" uid="uid://dg7iuundx53kx" path="res://scenes/player.tscn" id="13_s8em3"]
+[ext_resource type="PackedScene" uid="uid://cwxf4mu2iuu5d" path="res://scenes/enemy.tscn" id="14_3np24"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fp76t"]
 texture = ExtResource("1_c0adj")
@@ -12785,3 +12786,6 @@ to  the underground"
 
 [node name="Player_Cave_Hunter" parent="." unique_id=1189760568 instance=ExtResource("13_s8em3")]
 position = Vector2(-1141, -148)
+
+[node name="Enemy" parent="." unique_id=469638766 instance=ExtResource("14_3np24")]
+position = Vector2(-991, -128)
