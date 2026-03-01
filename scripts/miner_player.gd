@@ -195,17 +195,23 @@ func _on_transform_finished() -> void:
 		magma_timer = MAGMA_DURATION
 
 func _perform_fireblast() -> void:
-	# Optional: If your Fireblast has its own AnimatedSprite2D child:
+	# 1. Visual Flip: Flip the entire area so the animation faces the right way
+	# We use scale.x because flipping the sprite alone won't flip the hitbox shape
+	fireblast_area.scale.x = float(facing)
+
+	# 2. Play the animation
 	fireblast_anim.play("FireBlast")
 
+	# 3. Enable the blast
 	fireblast_area.visible = true
 	fireblast_area.monitoring = true
 	fireblast_shape.disabled = false
 
-	# Position it based on facing
+	# 4. Position: Ensure it spawns in front of the player
+	# absf ensures we always start with a positive offset, then multiply by facing
 	fireblast_area.position.x = absf(fireblast_area.position.x) * float(facing)
 
-	# Wait 0.3 seconds then turn it off
+	# 5. Timer to turn it off
 	get_tree().create_timer(0.3).timeout.connect(func():
 		fireblast_area.monitoring = false
 		fireblast_shape.disabled = true

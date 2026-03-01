@@ -704,6 +704,7 @@ shape = SubResource("RectangleShape2D_ieu5k")
 
 [node name="Fireblast" type="Area2D" parent="." unique_id=90404167 groups=["player_attack"]]
 position = Vector2(23, -7)
+collision_layer = 8
 
 [node name="fireblast_anim" type="AnimatedSprite2D" parent="Fireblast" unique_id=1190881138]
 sprite_frames = SubResource("SpriteFrames_07w7j")

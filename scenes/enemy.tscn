@@ -49,9 +49,6 @@ animation = &"idle"
 position = Vector2(2, 1)
 shape = SubResource("CapsuleShape2D_7p1mj")
 
-[node name="WallDetector" type="RayCast2D" parent="." unique_id=386205841]
-target_position = Vector2(-57, 0)
-
 [node name="HurtBox" type="Area2D" parent="." unique_id=1847811780]
 collision_mask = 8
 
@@ -60,10 +57,20 @@ position = Vector2(2, 1)
 shape = SubResource("CapsuleShape2D_md0e3")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1545099551]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1675689899]
 position = Vector2(2, 1)
 shape = SubResource("CapsuleShape2D_4ra3w")
 
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=386205841]
+position = Vector2(-8, 0)
+target_position = Vector2(20, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1724526769]
+position = Vector2(-8, 0)
+target_position = Vector2(-20, 0)
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
